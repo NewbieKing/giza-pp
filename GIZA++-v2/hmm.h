@@ -78,8 +78,8 @@ class hmm : public model2
   HMMNetwork *makeHMMNetwork(const Vector<WordIndex>& es,const Vector<WordIndex>&fs,bool doInit)const;
   friend class model3;
   //这里添加两个用于把table打印到文件的函数
-  void print_ttable(filename);
-  void print_atable(filename);
+  void print_ttable(const char *filename);
+  void print_atable(const char *filename);
 };
 
 #endif
