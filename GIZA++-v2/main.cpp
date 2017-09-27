@@ -567,6 +567,7 @@ double StartTesting(int &result)
   if (TestCorpusFilename != "")
       testCorpus= new sentenceHandler(TestCorpusFilename.c_str(), &eTestVcbList, &fTestVcbList);
   useDict=0;
+  Dictionary *dictionary;  
   dictionary = new Dictionary("");
   int minIter=0;
   //下面的宏判断我还不确定在test阶段要怎么修改，暂时先不动它
