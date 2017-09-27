@@ -811,8 +811,8 @@ class Dictionary{
 	   }
 	   //这里我添加了把ttable和atable打印到文件中的操作
 	   {
-	     h.print_ttables("ttable.file");
-	     h.print_atables("atable.file");
+	     h.print_ttable("ttable.file");
+	     h.print_atable("atable.file");
 	   }
 	    	 
 
