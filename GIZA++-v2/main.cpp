@@ -584,7 +584,7 @@ double StartTesting(int &result)
   tmodel<COUNT, PROB> tTable;
   #endif
   */
-   
+   tmodel<COUNT, PROB> tTable; 
    model1 m1(CorpusFilename.c_str(), eTrainVcbList, fTrainVcbList,tTable,trainPerp, 
 	    *corpus,&testPerp, testCorpus, //这里的testPerp是前面定义的全局变量所以它必不为NULL,而testCorpus则取决于我们在./GIZA++时是否传入-tc参数。
 	    trainViterbiPerp, &testViterbiPerp);//trainViterbiPerp,testViterbiPerp同样是前面定义的未初始化的全局变量
