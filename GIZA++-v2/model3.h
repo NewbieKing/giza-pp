@@ -73,6 +73,8 @@ public:
   
   void em(int, sentenceHandler&);
   int viterbi(int, int, int,int);
+  //我们新加的方法
+  int viterbi_test(int noIterationsModel3,int noIterationsModel4,int noIterationsModel5,int noIterationsModel6);
     
 private:
   LogProb prob_of_special(Vector<WordIndex>&, 
