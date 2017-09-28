@@ -12,13 +12,13 @@ int main(int argc,char**argv)
 {
   vector<double>weights; //weights是一个元素类型为double的vector
   vector<string>filenames; //filenames是一个元素类型为string的vector
-  for(int i=1;i<argc;++i)
+  for(int i=1;i<argc;++i) //i从1开始，意味着我们只要后面的参数，而不要我们的执行文件名这个参数(argv[0])
     if(string(argv[i])=="-weight")
       weights.push_back(atof(argv[++i]));
     else
       filenames.push_back(argv[i]);//这里是我们正常输入参数时的逻辑，即把我们输入的文件名字push到filenames中去
   
-  if((filenames.size()%2)==1||filenames.size()==0 )
+  if((filenames.size()%2)==1||filenames.size()==0 )//这里也可以先不用管，它不对应我们正常输入时的情况
     {
       cerr << argv[0] << " txt1 txt2 [txt3 txt4 -weight w]\n";
       cerr << " Converts plain text into GIZA++ snt-format.\n";
