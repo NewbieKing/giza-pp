@@ -10,13 +10,13 @@ using namespace std;
 
 int main(int argc,char**argv)
 {
-  vector<double>weights;
-  vector<string>filenames;
+  vector<double>weights; //weights是一个元素类型为double的vector
+  vector<string>filenames; //filenames是一个元素类型为string的vector
   for(int i=1;i<argc;++i)
     if(string(argv[i])=="-weight")
       weights.push_back(atof(argv[++i]));
     else
-      filenames.push_back(argv[i]);
+      filenames.push_back(argv[i]);//这里是我们正常输入参数时的逻辑，即把我们输入的文件名字push到filenames中去
   
   if((filenames.size()%2)==1||filenames.size()==0 )
     {
