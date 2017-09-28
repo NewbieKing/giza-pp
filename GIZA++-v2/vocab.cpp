@@ -40,8 +40,8 @@ void vcbList::readVocabList()
     exit(1);
   }
   
-  list.push_back(entry);
-  s2i[entry.word]=list.size()-1;
+  list.push_back(entry); //把刚才我们创建的entry("NULL",0)push进去
+  s2i[entry.word]=list.size()-1; //对应我们的entry.word("NULL")的id是1-1=0
 
   while(getline(vFile, line)){
     istringstream buffer(line);
