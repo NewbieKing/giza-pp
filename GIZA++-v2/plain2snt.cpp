@@ -26,8 +26,8 @@ int main(int argc,char**argv)
     }
   //这里定义了很多变量
   string line1,line2,word;
-  map<string,int> v1,v2;
-  map<string,int> id1,id2;
+  map<string,int> v1,v2; //词频对应表
+  map<string,int> id1,id2; //词id对应表
   vector<string> iid1(2),iid2(2);
   
   string w1(filenames[0]); //这里把我们输入的第一个文件名赋予string w1,比如source.txt
@@ -62,25 +62,33 @@ int main(int argc,char**argv)
   
 
   ofstream ovocab1(vocab1.c_str()),ovocab2(vocab2.c_str()),osnt1(snt1.c_str()),osnt2(snt2.c_str()); //根据文件名创建相应的文件
+  //下面是从我们的一开始作为参数的文件名对应的文件中读取数据
   for(unsigned int i=0;i<filenames.size();i+=2)
     {
       ifstream i1(filenames[i].c_str()),i2(filenames[i+1].c_str());
       if(!i1)cerr << "WARNING: " << filenames[i] << " cannot be read.\n";
       if(!i2)cerr << "WARNING: " << filenames[i+1] << " cannot be read.\n";
-      while(getline(i1,line1) && getline(i2,line2) )
+      while(getline(i1,line1) && getline(i2,line2) ) //当都能读出一行时(所以我们要求语料文件是一一对应的格式)，我们是对两个文件一行一行的处理
 	{
+/*
+  string line1,line2,word;
+  map<string,int> v1,v2;
+  map<string,int> id1,id2;
+  vector<string> iid1(2),iid2(2);
+*/
 	  vector<string> t1,t2;
-	  istringstream ii1(line1);
+	  istringstream ii1(line1); //把读出行line1和一个istringstream对象绑定起来
 	  while(ii1>>word)
 	    {
-	      t1.push_back(word);
-	      v1[word]++;
+	      t1.push_back(word); //把我们从第一个参数对应的文件中读出的每一行的每一个word push到我们的t1中
+	      v1[word]++; //这里是count该word的频数
 	      if( id1.find(word)==id1.end() )
 		{
-		  iid1.push_back(word);
-		  id1[word]=iid1.size()-1;
+		  iid1.push_back(word); //把我们的word push进iid1中，这里注意我们的iid1原始长度是2.
+		  id1[word]=iid1.size()-1; //所以当我push第一个word进去时，我们的id是2+1-1=2
 		}
 	    }
+	  //同理于上面的ii1
 	  istringstream ii2(line2);
 	  while(ii2>>word)
 	    {
@@ -93,11 +101,11 @@ int main(int argc,char**argv)
 		}
 	    }
 	  double w=1.0;
-	  if( i/2<weights.size() )
+	  if( i/2<weights.size() ) //这个if也先不用去管，因为我们的正常流程中没有输入-weight参数，所以weights.size()==0
 	    w=weights[i/2];
-	  if( t1.size()&&t2.size() )
+	  if( t1.size()&&t2.size() ) //如果t1,t2都非空，这里是向osnt1,onst2中输入
 	    {
-	      osnt1 << w << "\n";
+	      osnt1 << w << "\n"; //所以我们看到每次pair频数都是1，因为之前的那个if block没有执行
 	      for(unsigned int j=0;j<t1.size();++j)osnt1 << id1[t1[j]] << ' ';
 	      osnt1 << '\n';
 	      for(unsigned int j=0;j<t2.size();++j)osnt1 << id2[t2[j]] << ' ';
@@ -114,8 +122,8 @@ int main(int argc,char**argv)
 	      " target: " << filenames[i+1] << " " << t2.size() << ").\n";
 	}
     }
-  
-  for(unsigned int i=2;i<iid1.size();++i)
+  //下面是向我们的两个vcb文件中输入
+  for(unsigned int i=2;i<iid1.size();++i) //可以看到为什么我们的id是从2开始
     ovocab1 << i << ' ' << iid1[i] << ' ' << v1[iid1[i]] << '\n';
   for(unsigned int i=2;i<iid2.size();++i)
     ovocab2 << i << ' ' << iid2[i] << ' ' << v2[iid2[i]] << '\n';
