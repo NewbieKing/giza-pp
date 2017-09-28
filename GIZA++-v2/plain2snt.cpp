@@ -24,14 +24,16 @@ int main(int argc,char**argv)
       cerr << " Converts plain text into GIZA++ snt-format.\n";
       exit(1);
     }
+  //这里定义了很多变量
   string line1,line2,word;
   map<string,int> v1,v2;
   map<string,int> id1,id2;
   vector<string> iid1(2),iid2(2);
   
-  string w1(filenames[0]);
-  string w2(filenames[1]);
-  
+  string w1(filenames[0]); //这里把我们输入的第一个文件名赋予string w1,比如source.txt
+  string w2(filenames[1]); //这里把我们输入的第二个文件名赋予string w2,比如target.txt
+   
+  //下面这个if做的处理是如果我们的输入文件名w1,w2有.txt,.tok的后缀，我们把这些后缀去掉
   if( w1.length()>4&&w2.length()>4&&((w1.substr(w1.length()-4,w1.length())==".tok" && w2.substr(w2.length()-4,w2.length())==".tok" )||
 				     (w1.substr(w1.length()-4,w1.length())==".txt" && w2.substr(w2.length()-4,w2.length())==".txt" ) ))
     {
@@ -41,21 +43,25 @@ int main(int argc,char**argv)
     } 
       
 
-  string vocab1(w1),vocab2(w2),snt1,snt2;
-  unsigned int slashpos=vocab1.rfind('/')+1;
-  if( slashpos>=vocab1.length() ) slashpos=0;
-  string vocab1x(vocab1.substr(slashpos,vocab1.length()));
+  string vocab1(w1),vocab2(w2),snt1,snt2; //我们分别用w1,w2去初始化vocab1,vocab2，即vocab1,vocab2都是去掉后缀的形式
+  unsigned int slashpos=vocab1.rfind('/')+1; //这里是找到Find last occurrence of content('/') in string,
+  //这里的意思是把前面的路径名和文件名分隔开，让我们的slashpos执行文件名的第一个字符的位置
+  if( slashpos>=vocab1.length() ) slashpos=0; //这是对应与我们在vocab1中没有找到'/'的情况,返回npos,npos is a static member constant value with the greatest possible value for an element of type size_t
+  string vocab1x(vocab1.substr(slashpos,vocab1.length())); //这里是把去掉路径名的vocab1赋予vocab1x
   cout << vocab1 << " -> " << vocab1x << endl;
+  //下面是对vocab2做同样的处理
   slashpos=vocab2.rfind('/')+1;
   if( slashpos>=vocab2.length() ) slashpos=0;
-  string vocab2x(vocab2.substr(slashpos,vocab2.length()));
-  cout << vocab2 << " -> " << vocab2x << endl;  
-  snt1=vocab1+"_"+vocab2x+string(".snt");
-  snt2=vocab2+"_"+vocab1x+string(".snt");
-  vocab1+=string(".vcb");
+  string vocab2x(vocab2.substr(slashpos,vocab2.length())); //同样把去掉路径名的vocab2赋予vocab2x
+  cout << vocab2 << " -> " << vocab2x << endl; 
+  //注意下面我们有的位置用vocab1(有路径),有的位置用vocab1x(无路径)，道理很简单[对于vocab2,vocab2x也是同理]，是为了在创建文件时保留路径，创建在同一文件夹下面
+  snt1=vocab1+"_"+vocab2x+string(".snt"); //给snt1赋予这种格式的值
+  snt2=vocab2+"_"+vocab1x+string(".snt"); //给snt2赋予这种格式的值，这里终于解开了我一直以来的疑惑，为什么snt文件的名字的格式那么规整
+  vocab1+=string(".vcb"); 
   vocab2+=string(".vcb");
+  
 
-  ofstream ovocab1(vocab1.c_str()),ovocab2(vocab2.c_str()),osnt1(snt1.c_str()),osnt2(snt2.c_str());
+  ofstream ovocab1(vocab1.c_str()),ovocab2(vocab2.c_str()),osnt1(snt1.c_str()),osnt2(snt2.c_str()); //根据文件名创建相应的文件
   for(unsigned int i=0;i<filenames.size();i+=2)
     {
       ifstream i1(filenames[i].c_str()),i2(filenames[i+1].c_str());
