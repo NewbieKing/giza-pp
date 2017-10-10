@@ -63,7 +63,8 @@ void model1::initialize_table_uniformly(sentenceHandler& sHandler1){
 
 int model1::em_with_tricks(int noIterations, /*Perplexity& perp, sentenceHandler& sHandler1, */
 			    bool seedModel1, Dictionary& dictionary, bool useDict /*Perplexity* testPerp, sentenceHandler* testHandler, 
-										     Perplexity& trainViterbiPerp, Perplexity* testViterbiPerp */ )
+                            Perplexity& trainViterbiPerp, Perplexity* testViterbiPerp */ )
+//这里函数除了第一个参数noIterations是有值的，剩下的三个参数分别是false,NULL,false。
 {
   double minErrors=1.0;int minIter=0;
   string modelName="Model1",shortModelName="1";
@@ -72,7 +73,7 @@ int model1::em_with_tricks(int noIterations, /*Perplexity& perp, sentenceHandler
   int pair_no;
   bool dump_files = false ;
   st = time(NULL);
-  sHandler1.rewind();
+  sHandler1.rewind(); //这里的这个语句对我们的基类中的sentenceHandler& sHandler1;进行了修改，这是一处@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
   cout << "==========================================================\n";
   cout << modelName << " Training Started at: "<< ctime(&st) << "\n";  
   for(int it = 1; it <= noIterations; it++){
