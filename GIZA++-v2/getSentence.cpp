@@ -66,7 +66,7 @@ sentenceHandler::sentenceHandler(const char*  filename, vcbList* elist,
   noSentInBuffer = 0 ;
   Buffer.clear();
   bool isNegative=0;
-  if (elist && flist){
+  if (elist && flist){//该if开始
     cout << "Calculating vocabulary frequencies from corpus " << filename << '\n';
     sentPair s ;
     while (getNextSentence(s, elist, flist))
@@ -79,7 +79,7 @@ sentenceHandler::sentenceHandler(const char*  filename, vcbList* elist,
 	if( s.noOcc<0 )
 	  isNegative=1;
       }
-  }
+  }//if结尾
   if( isNegative==1 )
     {
       cerr << "WARNING: corpus contains negative occurrency frequencies => these are interpreted as entries of a manual dictionary.\n";
