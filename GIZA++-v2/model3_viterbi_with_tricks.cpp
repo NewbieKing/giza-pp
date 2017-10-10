@@ -475,7 +475,7 @@ void model3::viterbi_loop_with_tricks(Perplexity& perp, Perplexity& viterbiPerp,
       MODEL_TYPE ef(es,fs,tTable,aTable,dTable,nTable,p1,p0,dm_in);//这里的p0,p1是我们的model3的数据成员，不过还没有初始化，这里我们
       //将对它们的值进行赋予(修改)
       viterbi_model2(ef,viterbi2alignment,pair_no-1);
-      Vector<pair<MoveSwapMatrix<MODEL_TYPE>*,LogProb> >setOfGoodCenters(1);
+      Vector<pair<MoveSwapMatrix<MODEL_TYPE>*,LogProb> >setOfGoodCenters(1);//注意这里的模板>  >两个'>'距离很远，这是为了不与'>>'混淆！
       set<alignment> alignments;
       MoveSwapMatrix<MODEL_TYPE> *best = (setOfGoodCenters[0].first  = new MoveSwapMatrix<MODEL_TYPE>(ef, viterbi2alignment));
       MoveSwapMatrix<MODEL_TYPE> _viterbi(*best), *viterbi=&_viterbi; // please, don't delete this line (FJO)
