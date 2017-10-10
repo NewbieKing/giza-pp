@@ -45,7 +45,7 @@ void vcbList::readVocabList()
 
   while(getline(vFile, line)){
     istringstream buffer(line);
-    if(!(buffer >> word_id >> word >> freq))
+    if(!(buffer >> word_id >> word >> freq)) //注意我们的判断都是执行，即我们是使用表达式的值来判断，而这个表达式如果是一个可执行的那么它会执行！
       cerr << "ERROR: reading vocabulary; " << word_id << ' ' << word << ' ' << freq << endl;
     if (word_id == 0){
       cerr << "ERROR: TOKEN ID 0 is reserved for special token NULL, in line: \n"<< line<<"\n" ;
