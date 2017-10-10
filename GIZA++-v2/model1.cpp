@@ -156,7 +156,7 @@ void model1::em_loop(int it,Perplexity& perp, sentenceHandler& sHandler1, bool s
     of2.open(alignfile);
   PROB uniform = 1.0/noFrenchWords ;
   sentPair sent ;
-  sHandler1.rewind();
+  sHandler1.rewind(); //这里又是一个十分可疑的修改地点@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
   while(sHandler1.getNextSentence(sent)){
     Vector<WordIndex>& es = sent.eSent;
     Vector<WordIndex>& fs = sent.fSent;
@@ -271,17 +271,17 @@ void model1::em_loop(int it,Perplexity& perp, sentenceHandler& sHandler1, bool s
 	} // end of if (denom > 0)
       }// if (!test)
     } // end of for (j) ;
-    sHandler1.setProbOfSentence(sent,cross_entropy);
+    sHandler1.setProbOfSentence(sent,cross_entropy); //可疑修改地点@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     //cerr << sent << "CE: " << cross_entropy << " " << so << endl;
-    perp.addFactor(cross_entropy-m*log(l+1.0), so, l, m,1);
-    viterbi_perp.addFactor(log(viterbi_score)-m*log(l+1.0), so, l, m,1);
+    perp.addFactor(cross_entropy-m*log(l+1.0), so, l, m,1); //可疑修改地点@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    viterbi_perp.addFactor(log(viterbi_score)-m*log(l+1.0), so, l, m,1); //可疑修改地点@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     if (dump_alignment||(FEWDUMPS&&sent.sentenceNo<1000)) //同理，这里dump_alignment和FEWDUMPS是false，所以该if的block不执行
       printAlignToFile(es, fs, evlist, fvlist, of2, viterbi_alignment, sent.sentenceNo, viterbi_score);
     addAL(viterbi_alignment,sent.sentenceNo,l);
     pair_no++;
   } /* of while */
-  sHandler1.rewind();
-  perp.record("Model1");
-  viterbi_perp.record("Model1");
+  sHandler1.rewind(); //可疑修改地点@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+  perp.record("Model1"); //可疑修改地点@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 
+  viterbi_perp.record("Model1"); //可疑修改地点@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
   errorReportAL(cout, "IBM-1");
 }
