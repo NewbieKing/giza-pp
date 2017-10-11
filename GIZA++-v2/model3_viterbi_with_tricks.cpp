@@ -610,7 +610,7 @@ void model3::viterbi_loop_with_tricks(Perplexity& perp, Perplexity& viterbiPerp,
      
       //下面又是我们新加的代码
       string sou_sent,tar_sent;
-      if(dumpfiles&&newflag&&oovflag)
+      if(dump_files&&newflag&&oovflag)
       {
 	      getline(sou_check,sou_sent);
 	      getline(tar_check,tar_sent);
