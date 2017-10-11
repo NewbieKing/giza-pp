@@ -430,9 +430,11 @@ void model3::viterbi_loop_with_tricks(Perplexity& perp, Perplexity& viterbiPerp,
   int pair_no;
   HillClimbingSteps=0;
   NumberOfAlignmentsInSophisticatedCountCollection=0;
-  //这里FEWDUMPS,ONLYALDUMPS初值都为0（DUMPS初值也为0）
+	
+  //这里FEWDUMPS,ONLYALDUMPS初值都为0（DUMPS初值也为0），该if只有在dump_files为true(即final==1)时其判断条件才会成立
   if (dump_files||FEWDUMPS||(final&&(ONLYALDUMPS)) )
     of2.open(alignfile);
+	
   if( dump_files&&PrintN&&final )
     {
       string x=alignfile+string("NBEST");
