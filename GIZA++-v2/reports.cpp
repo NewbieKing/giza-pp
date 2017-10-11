@@ -19,6 +19,9 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307,
 USA.
 
 */
+#include <vector>
+#include <map>
+#include <string>
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -108,7 +111,7 @@ void printAlignToFile(const Vector<WordIndex>& es,
 		      const Vector<WordEntry>& fvlist, 
 		      ostream& of2, 
 		      const Vector<WordIndex>& viterbi_alignment, 
-		      int pair_no, double alignment_score)
+		      int pair_no, double alignment_score,string sou_sent,string tar_sent)
      
      // prints the given alignment to alignments file (given it stream pointer)
      // in a format recognizable by the draw-alignment tool ... which is of the
@@ -136,22 +139,43 @@ void printAlignToFile(const Vector<WordIndex>& es,
     {
       if(newflag&&oovflag)
       {
-	 
+      vector<string> sou_list,tar_list;
+      string word1,word2;
+      istringstream sou(sou_sent);
+      istringstream tar(tar_sent);
+      while(sou>>word1)
+      		sou_list.push_back(word1);
+      while(tar>>word2)
+	      	tar_list.push_back(word2);
       //下面是copy代码
       of2 << "# Sentence pair (" << pair_no <<") source length " << l << " target length "<< m << 
 	" alignment score : "<< alignment_score << '\n';
       //要记得es[0],fs[0]都是"NULL"
       for (WordIndex j = 1 ; j <= m ; j++){
-	of2 << fvlist[fs[j]].word << " " ;
-	translations[viterbi_alignment[j]].push_back(j);
+	if(tar_list[j-1][tar_list[j-1].size()-1]==0)
+	{
+		of2<<tar_list[j-1]<<"@!#"<<" ";
+	}
+	else
+	{
+	 	of2 << fvlist[fs[j]].word << " " ;
+		translations[viterbi_alignment[j]].push_back(j);
+	}
       }
       of2 << '\n';
       
       for (WordIndex i = 0  ; i <= l ; i++){
-	of2 << evlist[es[i]].word << " ({ " ;
-	for (WordIndex j = 0 ; j < translations[i].size() ; j++)
-	  of2 << translations[i][j] << " " ;
-	of2 << "}) ";
+	if(sou_list[i][sou_list.size()-1]==0&&i<l)
+	{
+		of2<<sou_list[i]<<"@!#"<<" ";
+	}
+	else
+	{
+		of2 << evlist[es[i]].word << " ({ " ;
+		for (WordIndex j = 0 ; j < translations[i].size() ; j++)
+	  	of2 << translations[i][j] << " " ;
+		of2 << "}) ";
+	}
       }
       of2 << '\n';
       //以上是copy代码
