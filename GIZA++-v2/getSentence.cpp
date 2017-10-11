@@ -65,11 +65,16 @@ sentenceHandler::sentenceHandler(const char*  filename, vcbList* elist,
   pair_no = 0 ;
   noSentInBuffer = 0 ;
   Buffer.clear();
-  bool isNegative=0;
+	
+  bool isNegative=0; //我们自己创建的变量
+	
   if (elist && flist){//该if开始
     cout << "Calculating vocabulary frequencies from corpus " << filename << '\n';
-    sentPair s ;
-    while (getNextSentence(s, elist, flist))
+	  
+  sentPair s ; //我们自己创建的变量
+	  
+  //注意该while循环的条件判断是一个函数执行，而这个函数也是我们这个构造函数的核心点----getNextSentence
+  while (getNextSentence(s, elist, flist))
       {
 	totalPairs1++;
 	totalPairs2+=s.realCount; 
