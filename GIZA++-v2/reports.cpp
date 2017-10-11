@@ -19,6 +19,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307,
 USA.
 
 */
+#include <iostream>
+#include <fstream>
 #include <sstream>
 #include <time.h>
 #include <set>
@@ -96,7 +98,10 @@ void  printSentencePair(Vector<WordIndex>& es,
 
 }
 
+extern bool newflag;
+extern bool oovflag;
 extern short CompactAlignmentFormat;
+//该函数是打印一个sentence pair的alignment结果
 void printAlignToFile(const Vector<WordIndex>& es, 
 		      const Vector<WordIndex>& fs, 
 		      const Vector<WordEntry>& evlist, 
@@ -129,6 +134,29 @@ void printAlignToFile(const Vector<WordIndex>& es,
     }
   else //走这个
     {
+      if(newflag&&oovflag)
+      {
+	 
+      //下面是copy代码
+      of2 << "# Sentence pair (" << pair_no <<") source length " << l << " target length "<< m << 
+	" alignment score : "<< alignment_score << '\n';
+      //要记得es[0],fs[0]都是"NULL"
+      for (WordIndex j = 1 ; j <= m ; j++){
+	of2 << fvlist[fs[j]].word << " " ;
+	translations[viterbi_alignment[j]].push_back(j);
+      }
+      of2 << '\n';
+      
+      for (WordIndex i = 0  ; i <= l ; i++){
+	of2 << evlist[es[i]].word << " ({ " ;
+	for (WordIndex j = 0 ; j < translations[i].size() ; j++)
+	  of2 << translations[i][j] << " " ;
+	of2 << "}) ";
+      }
+      of2 << '\n';
+      //以上是copy代码
+      }
+	  
       of2 << "# Sentence pair (" << pair_no <<") source length " << l << " target length "<< m << 
 	" alignment score : "<< alignment_score << '\n';
       //要记得es[0],fs[0]都是"NULL"
