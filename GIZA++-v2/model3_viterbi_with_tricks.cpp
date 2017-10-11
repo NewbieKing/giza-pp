@@ -33,6 +33,8 @@ USA.
 #include "myassert.h"
 #include "Parameter.h"
 
+extern bool newgflag;
+extern bool oovflag;
 GLOBAL_PARAMETER(float,PrintN,"nbestalignments","for printing the n best alignments",PARLEV_OUTPUT,0);
 
 const short LogHillClimb=0,LogPeg=0;
@@ -443,6 +445,13 @@ void model3::viterbi_loop_with_tricks(Perplexity& perp, Perplexity& viterbiPerp,
       string x=alignfile+string("NBEST");
       of3= new ofstream(x.c_str());
     }
+	//新加的代码
+  if(newflag&&oovflag)
+  {
+      fstream sou_check("./id_sou_check.txt");
+      fstream tar_check("./id_tar_check.txt");
+  }
+	//这是一块
   pair_no = 0 ; // sentence pair number 
   // for each sentence pair in the corpus
   perp.clear() ; // clears cross_entrop & perplexity 
@@ -597,12 +606,19 @@ void model3::viterbi_loop_with_tricks(Perplexity& perp, Perplexity& viterbiPerp,
       perp.addFactor(log(double(align_total_count)), count, l, m,0);
       viterbiPerp.addFactor(log(double(setOfGoodCenters[bestAlignment].second)), count, l, m,0);
       massert(log(double(setOfGoodCenters[bestAlignment].second)) <= log(double(align_total_count)));
-	  
+     
+      //下面又是我们新加的代码
+      string sou_sent,tar_sent;
+      if(dumpfiles&&newflag&&oovflag)
+      {
+	      getline(sou_check,sou_sent);
+	      getline(tar_check,tar_sent);
+      }
+
       //这里FEWDUMPS,ONLYALDUMPS初值都为0（DUMPS初值也为0）
-      if (dump_files||(FEWDUMPS&&sent.sentenceNo<1000)||(final&&(ONLYALDUMPS)) )//这里很明显只有在dump_files为true的情况下才会进行，而
-	                   //dump_files为true即是我们之前的final为true，循环进行到最后一轮
+      if (dump_files||(FEWDUMPS&&sent.sentenceNo<1000)||(final&&(ONLYALDUMPS)) )//这里很明显只有在dump_files为true的情况下才会进行，而dump_files为true即是我们之前的final为true，循环进行到最后一轮
 	printAlignToFile(es, fs, Elist.getVocabList(), Flist.getVocabList(), of2, (setOfGoodCenters[bestAlignment].first)->getAlignment(), pair_no, 
-			 setOfGoodCenters[bestAlignment].second);
+			 setOfGoodCenters[bestAlignment].second,sou_sent,tar_sent);
       //这里的es和fs分别是source sentence和target sentence(我们从corpus.snt中读取的sentence pair)，它的表示形式是用词id表示的
       //Elist和Flist则是我们的model3从model1继承而来的数据成员，都是vcbList类型。
 	  
@@ -684,6 +700,10 @@ void model3::viterbi_loop_with_tricks(Perplexity& perp, Perplexity& viterbiPerp,
       of2.close(); //有开有关
     delete of3;
     delete writeNBestErrorsFile;
+    //关闭我们的文件
+    sou_check.close();
+    tar_check.close();
+    //ok，这是一块
     double FSent=pair_no;
     cout << "#centers(pre/hillclimbed/real): " << NAlignment/FSent << " " << NHillClimbed/FSent << " " << NCenter/FSent << "  #al: " << NTotal/FSent << " #alsophisticatedcountcollection: " <<   NumberOfAlignmentsInSophisticatedCountCollection/FSent << " #hcsteps: " << HillClimbingSteps/FSent << '\n';
     cout << "#peggingImprovements: " << NBetterByPegging/FSent << '\n';
