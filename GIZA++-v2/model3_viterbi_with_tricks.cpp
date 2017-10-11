@@ -34,7 +34,7 @@ USA.
 #include "myassert.h"
 #include "Parameter.h"
 
-extern bool newgflag;
+extern bool newflag;
 extern bool oovflag;
 GLOBAL_PARAMETER(float,PrintN,"nbestalignments","for printing the n best alignments",PARLEV_OUTPUT,0);
 
