@@ -131,6 +131,7 @@ void printAlignToFile(const Vector<WordIndex>& es,
     {
       of2 << "# Sentence pair (" << pair_no <<") source length " << l << " target length "<< m << 
 	" alignment score : "<< alignment_score << '\n';
+      //要记得es[0],fs[0]都是"NULL"
       for (WordIndex j = 1 ; j <= m ; j++){
 	of2 << fvlist[fs[j]].word << " " ;
 	translations[viterbi_alignment[j]].push_back(j);
