@@ -660,7 +660,7 @@ void model3::viterbi_loop_with_tricks(Perplexity& perp, Perplexity& viterbiPerp,
 		}
 	      if( of3&&i<PrintN )
 		printAlignToFile(es, fs, Elist.getVocabList(), Flist.getVocabList(),*of3,x.getAlignment(), pair_no, 
-				 als[i].v/sum*count);
+				 als[i].v/sum*count,"","");
 	      sum2+=als[i].v;
 	      if( writeNBestErrorsFile )
 		{
