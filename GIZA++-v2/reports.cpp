@@ -119,15 +119,15 @@ void printAlignToFile(const Vector<WordIndex>& es,
   Vector<Vector<WordIndex> > translations(es.size()); // each english words has a vector 
   // of zero or more translations .
   l = es.size() - 1;
-  m = fs.size() - 1;
-  if( CompactAlignmentFormat )
+  m = fs.size() - 1;	
+  if( CompactAlignmentFormat ) //这里CompactAlignmentFormat是我们的main.cpp中定义的全局变量值为0，所以走else
     {
       for (WordIndex j = 1 ; j <= m ; j++)
 	if( viterbi_alignment[j] )
 	  of2 << viterbi_alignment[j]-1 << ' ' << j-1 << ' ';
       of2 << '\n';
     }
-  else
+  else //走这个
     {
       of2 << "# Sentence pair (" << pair_no <<") source length " << l << " target length "<< m << 
 	" alignment score : "<< alignment_score << '\n';
