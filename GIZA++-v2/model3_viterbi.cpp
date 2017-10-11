@@ -633,7 +633,7 @@ void model3::viterbi_loop(Perplexity& perp, Perplexity& viterbiPerp, sentenceHan
 	}
 	else {
 	  if (dump_files)
-	    printAlignToFile(es, fs, Elist.getVocabList(), Flist.getVocabList(), of2, viterbi_alignment, pair_no, viterbi_score);
+	    printAlignToFile(es, fs, Elist.getVocabList(), Flist.getVocabList(), of2, viterbi_alignment, pair_no, viterbi_score,"","");
 	  addAL(viterbi_alignment,sent.sentenceNo,l);
 	}
       } // end of if (collect_counts) 
