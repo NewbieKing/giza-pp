@@ -19,6 +19,9 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307,
 USA.
 
 */
+#include <iostream>
+#include <sstream>
+#include <fstream>
 #include "mystl.h"
 #include "model3.h"
 #include "collCounts.h"
