@@ -137,6 +137,7 @@ short NoEmptyWord=0;
 bool FEWDUMPS=0;
 //下面是我们新增的全局变量
 bool newflag=0;
+bool oov=0;
 //结束
 GLOBAL_PARAMETER(bool,ONLYALDUMPS,"ONLYALDUMPS","1: do not write any files",PARLEV_OUTPUT,0);
 GLOBAL_PARAMETER(short,CompactAlignmentFormat,"CompactAlignmentFormat","0: detailled alignment format, 1: compact alignment format ",PARLEV_OUTPUT,0);
@@ -889,7 +890,8 @@ string ReadTablePrefix;
   getGlobalParSet().insert(new Parameter<string>("CoocurrenceFile",ParameterChangedFlag,"",CoocurrenceFile,PARLEV_SPECIAL));
 #endif
   //下面这条是新加的
-  getGlobalParSet().insert(new Parameter<bool>("NEW",ParameterChangedFlag,"flag for new parameter",newflag,-1));
+  getGlobalParSet().insert(new Parameter<bool>("OOV",ParameterChangedFlag,"flag for new parameter OOV",oov,-1));
+  getGlobalParSet().insert(new Parameter<bool>("NEW",ParameterChangedFlag,"flag for new parameter NEW",newflag,-1));
   //结束
   getGlobalParSet().insert(new Parameter<string>("ReadTablePrefix",ParameterChangedFlag,"optimized",ReadTablePrefix,-1));
   getGlobalParSet().insert(new Parameter<string>("S",ParameterChangedFlag,"source vocabulary file name",SourceVocabFilename,PARLEV_INPUT));
