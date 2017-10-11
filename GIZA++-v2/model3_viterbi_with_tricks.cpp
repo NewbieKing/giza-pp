@@ -593,11 +593,13 @@ void model3::viterbi_loop_with_tricks(Perplexity& perp, Perplexity& viterbiPerp,
       perp.addFactor(log(double(align_total_count)), count, l, m,0);
       viterbiPerp.addFactor(log(double(setOfGoodCenters[bestAlignment].second)), count, l, m,0);
       massert(log(double(setOfGoodCenters[bestAlignment].second)) <= log(double(align_total_count)));
+	  
       //这里FEWDUMPS,ONLYALDUMPS初值都为0（DUMPS初值也为0）
       if (dump_files||(FEWDUMPS&&sent.sentenceNo<1000)||(final&&(ONLYALDUMPS)) )//这里很明显只有在dump_files为true的情况下才会进行，而
 	                   //dump_files为true即是我们之前的final为true，循环进行到最后一轮
 	printAlignToFile(es, fs, Elist.getVocabList(), Flist.getVocabList(), of2, (setOfGoodCenters[bestAlignment].first)->getAlignment(), pair_no, 
 			 setOfGoodCenters[bestAlignment].second);
+	  
       for(unsigned int i=0;i<setOfGoodCenters.size();++i)
 	setOfGoodCenters[i].first->check();
       if( of3||(writeNBestErrorsFile&&pair_no<int(ReferenceAlignment.size())) )
@@ -673,7 +675,7 @@ void model3::viterbi_loop_with_tricks(Perplexity& perp, Perplexity& viterbiPerp,
     errorReportAL(cerr,model);
     viterbiPerp.record(model);
     if (dump_files||FEWDUMPS||(final&&(ONLYALDUMPS)) )
-      of2.close();
+      of2.close(); //有开有关
     delete of3;
     delete writeNBestErrorsFile;
     double FSent=pair_no;
