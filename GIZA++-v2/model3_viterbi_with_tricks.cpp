@@ -417,6 +417,7 @@ void model3::viterbi_loop_with_tricks(Perplexity& perp, Perplexity& viterbiPerp,
 				      ADDITIONAL_MODEL_DATA_IN*dm_in,
 				      ADDITIONAL_MODEL_DATA_OUT*dm_out)
 {
+  //dump_files只有在final==true时才为true，final是调用该函数的viterbi函数中的一个变量
   ofstream *writeNBestErrorsFile=0;
   if( (dump_files||FEWDUMPS)&&PrintN&&ReferenceAlignment.size()>0 )
     {
