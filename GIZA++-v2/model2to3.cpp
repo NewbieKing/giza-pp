@@ -182,7 +182,7 @@ void model3::estimate_t_a_d(sentenceHandler& sHandler1, Perplexity& perp, Perple
       } // for (if total ...)
     } // end of for (j  ...)
     if (dump_files)
-      printAlignToFile(es, fs, Elist.getVocabList(), Flist.getVocabList(), of2, viterbi_alignment, sent.sentenceNo, viterbi_score);
+      printAlignToFile(es, fs, Elist.getVocabList(), Flist.getVocabList(), of2, viterbi_alignment, sent.sentenceNo, viterbi_score,"","");
     addAL(viterbi_alignment,sent.sentenceNo,l);
     if (!simple){
       max_fertility_here = min(WordIndex(m+1), MAX_FERTILITY);
