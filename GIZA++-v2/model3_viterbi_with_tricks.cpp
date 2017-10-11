@@ -599,6 +599,8 @@ void model3::viterbi_loop_with_tricks(Perplexity& perp, Perplexity& viterbiPerp,
 	                   //dump_files为true即是我们之前的final为true，循环进行到最后一轮
 	printAlignToFile(es, fs, Elist.getVocabList(), Flist.getVocabList(), of2, (setOfGoodCenters[bestAlignment].first)->getAlignment(), pair_no, 
 			 setOfGoodCenters[bestAlignment].second);
+      //这里的es和fs分别是source sentence和target sentence(我们从corpus.snt中读取的sentence pair)，它的表示形式是用词id表示的
+      //Elist和Flist则是我们的model3从model1继承而来的数据成员，都是vcbList类型。
 	  
       for(unsigned int i=0;i<setOfGoodCenters.size();++i)
 	setOfGoodCenters[i].first->check();
