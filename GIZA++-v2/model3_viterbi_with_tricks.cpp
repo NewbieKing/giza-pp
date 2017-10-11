@@ -457,6 +457,7 @@ void model3::viterbi_loop_with_tricks(Perplexity& perp, Perplexity& viterbiPerp,
       cerr <<sent.sentenceNo << '\n'; 
     time_t sent_s = time(NULL) ;
     pair_no++ ;
+    //下面之所以-1是因为我们在getSentence.cpp中是先默认把NULL给第一个push进去的。
     l = es.size() - 1 ;
     m = fs.size() - 1 ;
     if (Log){
