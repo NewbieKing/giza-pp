@@ -65,9 +65,11 @@ int main(int argc,char**argv)
   //下面是从我们的一开始作为参数的文件名对应的文件中读取数据
   for(unsigned int i=0;i<filenames.size();i+=2)
     {
-      ifstream i1(filenames[i].c_str()),i2(filenames[i+1].c_str());
+      ifstream i1(filenames[i].c_str()),i2(filenames[i+1].c_str());//读
+	  
       if(!i1)cerr << "WARNING: " << filenames[i] << " cannot be read.\n";
       if(!i2)cerr << "WARNING: " << filenames[i+1] << " cannot be read.\n";
+	  
       while(getline(i1,line1) && getline(i2,line2) ) //当都能读出一行时(所以我们要求语料文件是一一对应的格式)，我们是对两个文件一行一行的处理
 	{
 /*
