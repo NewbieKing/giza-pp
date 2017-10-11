@@ -89,10 +89,10 @@ sentenceHandler::sentenceHandler(const char*  filename, vcbList* elist,
     realCount=0;
 }
 
-void sentenceHandler::rewind()
+void sentenceHandler::rewind() //倒带
 {
   currentSentence = 0;
-  readflag = false ;
+  readflag = false ; 
   if (!allInMemory || 
       !(Buffer.size() >= 1 && Buffer[currentSentence].sentenceNo == 1)){
     // check if the buffer doe not already has the first chunk of pairs 
@@ -104,8 +104,10 @@ void sentenceHandler::rewind()
     Buffer.clear();
   }
   if (!allInMemory){
+    //所谓倒带最关键的在这里，即我们把指向inputFilename内容的指针重置回它一开头的位置
     delete inputFile;
     inputFile = new ifstream(inputFilename);
+	  
     if(!(*inputFile)){
       cerr << "\nERROR:(b) Cannot open " << inputFilename << " " << (int)errno;
     }
