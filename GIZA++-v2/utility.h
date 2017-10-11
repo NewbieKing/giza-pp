@@ -27,6 +27,7 @@ USA.
 #include "TTables.h"
 #include "getSentence.h"
 #include "vocab.h"
+#include <string>
 
 extern void printHelp(void);
 extern void parseConfigFile (char * fname );
@@ -47,7 +48,7 @@ extern void printOverlapReport(const tmodel<COUNT, PROB>& tTable,
 extern void printAlignToFile(const Vector<WordIndex>& es,  const Vector<WordIndex>& fs, 
 			     const Vector<WordEntry>& evlist, const Vector<WordEntry>& fvlist, 
 			     ostream& of2, const Vector<WordIndex>& viterbi_alignment, int pair_no, 
-			     double viterbi_score);
+			     double viterbi_score,string sou_sent,string tar_sent);
 
 extern double factorial(int) ;
 
