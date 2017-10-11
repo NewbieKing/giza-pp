@@ -447,11 +447,10 @@ void model3::viterbi_loop_with_tricks(Perplexity& perp, Perplexity& viterbiPerp,
       of3= new ofstream(x.c_str());
     }
 	//新加的代码
-  if(newflag&&oovflag)
-  {
+ 
       fstream sou_check("./id_sou_check.txt");
       fstream tar_check("./id_tar_check.txt");
-  }
+  
 	//这是一块
   pair_no = 0 ; // sentence pair number 
   // for each sentence pair in the corpus
