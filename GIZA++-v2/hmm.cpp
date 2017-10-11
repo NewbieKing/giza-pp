@@ -390,7 +390,7 @@ void hmm::em_loop(Perplexity& perp, sentenceHandler& sHandler1,
       cout << "Viterbi-perp: " << log(viterbi_score) << ' ' << log(max(net->finalMultiply,1e-100)) << ' ' << viterbi_score << ' ' << net->finalMultiply << ' ' << *net << "gamma: " << gamma << endl;
     delete net;net=0;
     if (dump_alignment||(FEWDUMPS&&sent.getSentenceNo()<1000) )
-      printAlignToFile(es, fs, Elist.getVocabList(), Flist.getVocabList(), of2, viterbi_alignment, sent.getSentenceNo(), viterbi_score);
+      printAlignToFile(es, fs, Elist.getVocabList(), Flist.getVocabList(), of2, viterbi_alignment, sent.getSentenceNo(), viterbi_score,"","");
     addAL(viterbi_alignment,sent.getSentenceNo(),l);    
     pair_no++;
   } /* of while */
