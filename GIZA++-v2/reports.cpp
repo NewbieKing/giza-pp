@@ -157,8 +157,10 @@ void printAlignToFile(const Vector<WordIndex>& es,
       //target sentence
       for (WordIndex k = 0 ; k <= tar_list.size() ; k++){
 	     if(tar_list[k][tar_list[k].size()-1]==0)
+	     {
 		     of2<<tar_list[k]<<"!@#"<<" "; 
 	             flag_list[k]=1;
+	     }
  	     else
 	    {
 		int incre=0;
@@ -179,19 +181,19 @@ void printAlignToFile(const Vector<WordIndex>& es,
       
       //source sentence
       of2 << evlist[es[0]].word << " ({ " ;
-      for (WordIndex j = 0 ; j < translations[i].size() ; j++)
-	  of2 << translations[i][j] << " " ;
+      for (WordIndex j = 0 ; j < translations[0].size() ; j++)
+	  of2 << translations[0][j] << " " ;
       of2 << "}) ";
       for (WordIndex k = 0  ; k <= sou_list.size() ; k++){
 	if(sou_list[k][sou_list.size()-1]==0)
 	{
-		of2<<sou_list[i]<<"@!#"<<" ";
+		of2<<sou_list[k]<<"@!#"<<" ";
 	}
 	else
 	{
 		for(WordIndex i=1;i<=l;i++)
 		{
-			if(evlist[es[i]]).word==sou_list[k])
+			if(evlist[es[i]].word==sou_list[k])
 			{
 				of2 << evlist[es[i]].word << " ({ " ;
 				for (WordIndex j = 0 ; j < translations[i].size() ; j++)
