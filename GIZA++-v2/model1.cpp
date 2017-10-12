@@ -81,7 +81,7 @@ int model1::em_with_tricks(int noIterations, /*Perplexity& perp, sentenceHandler
     it_st = time(NULL);
     cout <<  "-----------\n" << modelName << ": Iteration " << it << '\n';
     //GLOBAL_PARAMETER2(int,Model1_Dump_Freq,"MODEL 1 DUMP FREQUENCY","t1","dump frequency of Model 1",PARLEV_OUTPUT,0);
-    dump_files = (Model1_Dump_Freq != 0) &&  ((it % Model1_Dump_Freq)  == 0) && !NODUMPS ; //易见这里Model1_Dump_Freq值为0，所以dump_files也为0，即使false
+    dump_files = (Model1_Dump_Freq != 0) &&  ((it % Model1_Dump_Freq)  == 0) && !NODUMPS ; //易见这里Model1_Dump_Freq值为0，所以dump_files也为0，即false
     number = "";
     int n = it;
     do{
