@@ -150,7 +150,8 @@ bool sentenceHandler::getNextSentence(sentPair& sent, vcbList* elist, vcbList* f
 	s.fSent.resize(min(s.eSent.size(),s.fSent.size()));
       }
 	    
-      Buffer.push_back(s) ;
+      Buffer.push_back(s) ; //这是核心部分
+	    
       if (elist && flist){
 	if ((*elist).size() > 0)
 	  for (WordIndex i= 0 ; i < s.eSent.size() ; i++){
