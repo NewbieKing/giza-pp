@@ -137,6 +137,7 @@ bool sentenceHandler::getNextSentence(sentPair& sent, vcbList* elist, vcbList* f
     Buffer.clear();
     cout << "Reading more sentence pairs into memory ... \n";
     while((noSentInBuffer < TRAIN_BUFFER_SIZE) && readNextSentence(s)){
+      //这个if先不要管，虽然我们可能会走进这个block，但这个block中除了一个resize操作其它都是log型的指令
       if ((s.fSent.size()-1) > (MAX_FERTILITY-1) * (s.eSent.size()-1)){
 	cerr << "WARNING: The following sentence pair has source/target sentence length ration more than\n"<<
 	  "the maximum allowed limit for a source word fertility\n"<<
@@ -148,6 +149,7 @@ bool sentenceHandler::getNextSentence(sentPair& sent, vcbList* elist, vcbList* f
 	s.eSent.resize(min(s.eSent.size(),s.fSent.size()));
 	s.fSent.resize(min(s.eSent.size(),s.fSent.size()));
       }
+	    
       Buffer.push_back(s) ;
       if (elist && flist){
 	if ((*elist).size() > 0)
