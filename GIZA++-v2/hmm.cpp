@@ -266,8 +266,8 @@ void hmm::em_loop(Perplexity& perp, sentenceHandler& sHandler1,
   WordIndex i, j, l, m ;
   double cross_entropy;
   int pair_no=0 ;
-  perp.clear();
-  viterbi_perp.clear();
+  perp.clear(); //###############
+  viterbi_perp.clear(); //################
   ofstream of2;
   // for each sentence pair in the corpus
   if (dump_alignment||FEWDUMPS )
