@@ -448,8 +448,8 @@ void model3::viterbi_loop_with_tricks(Perplexity& perp, Perplexity& viterbiPerp,
     }
 	//新加的代码
  
-      fstream sou_check("./id_sou_check.txt");
-      fstream tar_check("./id_tar_check.txt");
+      ifstream sou_check("./id_sou_check.txt");
+      ifstream tar_check("./id_tar_check.txt");
   
 	//这是一块
   pair_no = 0 ; // sentence pair number 
