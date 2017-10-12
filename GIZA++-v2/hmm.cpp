@@ -87,7 +87,7 @@ int hmm::em_with_tricks(int noIterations)
     pair_no = 0;
     it_st = time(NULL) ;
     cout << endl << "-----------\n" << modelName << ": Iteration " << it << '\n';
-    dump_files = (dumpFreq != 0) && ((it % dumpFreq) == 0) && !NODUMPS;
+    dump_files = (dumpFreq != 0) && ((it % dumpFreq) == 0) && !NODUMPS; //dump_files一直为false
     number = "";
     int n = it;
     do{
@@ -98,7 +98,7 @@ int hmm::em_with_tricks(int noIterations)
     afileh = Prefix + ".h" + shortModelName + "." + number ;
     alignfile = Prefix + ".A" + shortModelName + "." + number ;
     test_alignfile = Prefix + ".tst.A" + shortModelName + "." + number ;
-    counts=HMMTables<int,WordClasses>(GLOBALProbabilityForEmpty,ewordclasses,fwordclasses);
+    counts=HMMTables<int,WordClasses>(GLOBALProbabilityForEmpty,ewordclasses,fwordclasses); //@@@@@@@@@@@@@@@@@@@@@@@
     aCountTable.clear();
     initAL();
     em_loop(perp, sHandler1,  dump_files , alignfile.c_str(), trainViterbiPerp, false,it==1,it);
@@ -113,7 +113,7 @@ int hmm::em_with_tricks(int noIterations)
       tTable.printCountTable(tfile.c_str(),Elist.getVocabList(),Flist.getVocabList(),1);
     tTable.normalizeTable(Elist, Flist);
     aCountTable.normalize(aTable);
-    probs=counts;
+    probs=counts; //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     cout << modelName << ": ("<<it<<") TRAIN CROSS-ENTROPY " << perp.cross_entropy()
 	 << " PERPLEXITY " << perp.perplexity() << '\n';
      if (testPerp && testHandler)
@@ -130,7 +130,7 @@ int hmm::em_with_tricks(int noIterations)
       if( OutputInAachenFormat==0)
 	tTable.printProbTable(tfile.c_str(),Elist.getVocabList(),Flist.getVocabList(),OutputInAachenFormat);
       ofstream afilestream(afileh.c_str());
-      probs.writeJumps(afilestream);
+      probs.writeJumps(afilestream); //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
       aCountTable.printTable(afile.c_str());
     }
     it_fn = time(NULL) ;
