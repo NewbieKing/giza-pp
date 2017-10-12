@@ -124,7 +124,9 @@ void printAlignToFile(const Vector<WordIndex>& es,
 
 {
   WordIndex l, m;
+	
   Vector<Vector<WordIndex> > translations(es.size()); // each english words has a vector 
+	
   // of zero or more translations .
   l = es.size() - 1;
   m = fs.size() - 1;	
@@ -147,40 +149,62 @@ void printAlignToFile(const Vector<WordIndex>& es,
       		sou_list.push_back(word1);
       while(tar>>word2)
 	      	tar_list.push_back(word2);
-      //下面是copy代码
+      vector<bool> flag_list(tar_list.size());
+      //下面是输出内容
       of2 << "# Sentence pair (" << pair_no <<") source length " << l << " target length "<< m << 
 	" alignment score : "<< alignment_score << '\n';
       //要记得es[0],fs[0]都是"NULL"
-      for (WordIndex j = 1 ; j <= m ; j++){
-	if(tar_list[j-1][tar_list[j-1].size()-1]==0)
-	{
-		of2<<tar_list[j-1]<<"@!#"<<" ";
-	}
-	else
-	{
-	 	of2 << fvlist[fs[j]].word << " " ;
-		translations[viterbi_alignment[j]].push_back(j);
-	}
-      }
+      //target sentence
+      for (WordIndex k = 0 ; k <= tar_list.size() ; k++){
+	     if(tar_list[k][tar_list[k].size()-1]==0)
+		     of2<<tar_list[k]<<"!@#"<<" "; 
+	             flag_list[k]=1;
+ 	     else
+	    {
+		int incre=0;
+//因为我们之前在处理oov时是直接把oov丢掉，然后把剩下的组成snt传入GIZA++计算，所以这里在把oov word加回来后，对我们的计算的alignment位置会有影响
+		for(WordIndex j=1; j<=m ;j++)
+		{
+			if(fvlist[fs[j]].word==tar_list[k])
+			{
+	 			of2 << fvlist[fs[j]].word << " " ;
+				for(int p=0;p<k;p++)
+					incre+=flag_list[p];
+				translations[viterbi_alignment[j]].push_back(j+incre); //计算得到的位置应该是j，而把oov加回来后，偏移为j+incre
+			}
+		}
+	    }
+      } 
       of2 << '\n';
       
-      for (WordIndex i = 0  ; i <= l ; i++){
-	if(sou_list[i][sou_list.size()-1]==0&&i<l)
+      //source sentence
+      of2 << evlist[es[0]].word << " ({ " ;
+      for (WordIndex j = 0 ; j < translations[i].size() ; j++)
+	  of2 << translations[i][j] << " " ;
+      of2 << "}) ";
+      for (WordIndex k = 0  ; k <= sou_list.size() ; k++){
+	if(sou_list[k][sou_list.size()-1]==0)
 	{
 		of2<<sou_list[i]<<"@!#"<<" ";
 	}
 	else
 	{
-		of2 << evlist[es[i]].word << " ({ " ;
-		for (WordIndex j = 0 ; j < translations[i].size() ; j++)
-	  	of2 << translations[i][j] << " " ;
-		of2 << "}) ";
+		for(WordIndex i=1;i<=l;i++)
+		{
+			if(evlist[es[i]]).word==sou_list[k])
+			{
+				of2 << evlist[es[i]].word << " ({ " ;
+				for (WordIndex j = 0 ; j < translations[i].size() ; j++)
+	  				of2 << translations[i][j] << " " ;
+				of2 << "}) ";
+			}
+		}
 	}
       }
       of2 << '\n';
-      //以上是copy代码
-      }
-	  
+      }//我们的if分支的结尾
+      else
+      {
       of2 << "# Sentence pair (" << pair_no <<") source length " << l << " target length "<< m << 
 	" alignment score : "<< alignment_score << '\n';
       //要记得es[0],fs[0]都是"NULL"
@@ -197,8 +221,9 @@ void printAlignToFile(const Vector<WordIndex>& es,
 	of2 << "}) ";
       }
       of2 << '\n';
-    }
-}
+      }//else分支的结尾
+    }//for循环的结尾
+}//函数的结尾
 
 
 void printOverlapReport(const tmodel<COUNT, PROB>& tTable, 
