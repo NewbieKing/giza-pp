@@ -195,7 +195,7 @@ bool sentenceHandler::getNextSentence(sentPair& sent, vcbList* elist, vcbList* f
     }
   return true ;
 }
-bool sentenceHandler::readNextSentence(sentPair& sent)
+bool sentenceHandler::readNextSentence(sentPair& sent) //实际上是一次性读三行
   /* This method reads in a new pair of sentences, each pair is read from the 
      corpus file as line triples. The first line the no of times this line 
      pair occured in the corpus, the second line is the source sentence and 
@@ -210,7 +210,7 @@ bool sentenceHandler::readNextSentence(sentPair& sent)
   if (getline(*inputFile, line)){
     istringstream buffer(line);
     buffer >> sent.noOcc;
-    if( sent.noOcc<0 )
+    if( sent.noOcc<0 ) //这里一般是不成立的
       {
 	if( realCount )
 	  {
@@ -226,7 +226,7 @@ bool sentenceHandler::readNextSentence(sentPair& sent)
 	else
 	  sent.realCount=1.0;
       }
-    else
+    else  //所以一般直接走的是这个
       sent.realCount=sent.noOcc;
   }
   else {
@@ -239,7 +239,7 @@ bool sentenceHandler::readNextSentence(sentPair& sent)
     // a null word (id 0) at the begining of the sentence. 
     while(buffer>>w){ // read source sentece , word by word .
       if (sent.eSent.size() < MAX_SENTENCE_LENGTH)
-	sent.eSent.push_back(w);
+	sent.eSent.push_back(w); //这里是如果我们的eSent.size()是在允许范围内的话，那么把读到的w推进eSent中
       else {
 	if( PrintedTooLong++<100)
 	  cerr << "{WARNING:(a)truncated sentence "<<pair_no<<"}";
@@ -278,7 +278,8 @@ bool sentenceHandler::readNextSentence(sentPair& sent)
     sent.noOcc = 0 ;
     sent.realCount=0;
     return(false);
-  }  
+  }
+  //下面同样
   if( sent.eSent.size()==1||sent.fSent.size()==1 )
     cerr << "ERROR: Forbidden zero sentence length " << sent.sentenceNo << endl;
   sent.sentenceNo = ++pair_no;
