@@ -156,7 +156,8 @@ void printAlignToFile(const Vector<WordIndex>& es,
       //要记得es[0],fs[0]都是"NULL"
       //target sentence
       for (WordIndex k = 0 ; k < tar_list.size() ; k++){
-	     if(tar_list[k][tar_list[k].size()-1]==0) //注意这里我们的每个tar_list[k]是有汉语，而一个汉字所占用的不是一个char字符位置
+	     if(tar_list[k][tar_list[k].size()-1]=='0') //注意这里一定不要忘记我们索引出来的是一个字符！！！所以不能直接和数字0比较
+	   //注意这里我们的每个tar_list[k]是有汉语，而一个汉字所占用的不是一个char字符位置
  	     {
 		     of2<<tar_list[k]<<"!@#"<<" "; 
 	             flag_list[k]=1;
@@ -185,7 +186,7 @@ void printAlignToFile(const Vector<WordIndex>& es,
 	  of2 << translations[0][j] << " " ;
       of2 << "}) ";
       for (WordIndex k = 0  ; k < sou_list.size() ; k++){
-	if(sou_list[k][sou_list[k].size()-1]==0)
+	if(sou_list[k][sou_list[k].size()-1]=='0')
 	{
 		of2<<sou_list[k]<<"@!#"<<" ";
 	}
@@ -225,7 +226,7 @@ void printAlignToFile(const Vector<WordIndex>& es,
       }
       of2 << '\n';
       }//else分支的结尾
-    }//for循环的结尾
+    }//更大的else分支的结尾
 }//函数的结尾
 
 
