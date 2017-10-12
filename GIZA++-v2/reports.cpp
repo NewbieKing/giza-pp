@@ -155,7 +155,7 @@ void printAlignToFile(const Vector<WordIndex>& es,
 	" alignment score : "<< alignment_score << '\n';
       //要记得es[0],fs[0]都是"NULL"
       //target sentence
-      for (WordIndex k = 0 ; k <= tar_list.size() ; k++){
+      for (WordIndex k = 0 ; k < tar_list.size() ; k++){
 	     if(tar_list[k][tar_list[k].size()-1]==0)
 	     {
 		     of2<<tar_list[k]<<"!@#"<<" "; 
@@ -167,7 +167,7 @@ void printAlignToFile(const Vector<WordIndex>& es,
 //因为我们之前在处理oov时是直接把oov丢掉，然后把剩下的组成snt传入GIZA++计算，所以这里在把oov word加回来后，对我们的计算的alignment位置会有影响
 		for(WordIndex j=1; j<=m ;j++)
 		{
-			if(fvlist[fs[j]].word==tar_list[k])
+			if(fvlist[fs[j]].word+"1"==tar_list[k])
 			{
 	 			of2 << fvlist[fs[j]].word << " " ;
 				for(int p=0;p<k;p++)
@@ -184,7 +184,7 @@ void printAlignToFile(const Vector<WordIndex>& es,
       for (WordIndex j = 0 ; j < translations[0].size() ; j++)
 	  of2 << translations[0][j] << " " ;
       of2 << "}) ";
-      for (WordIndex k = 0  ; k <= sou_list.size() ; k++){
+      for (WordIndex k = 0  ; k < sou_list.size() ; k++){
 	if(sou_list[k][sou_list.size()-1]==0)
 	{
 		of2<<sou_list[k]<<"@!#"<<" ";
@@ -193,7 +193,7 @@ void printAlignToFile(const Vector<WordIndex>& es,
 	{
 		for(WordIndex i=1;i<=l;i++)
 		{
-			if(evlist[es[i]].word==sou_list[k])
+			if(evlist[es[i]].word+"1"==sou_list[k])
 			{
 				of2 << evlist[es[i]].word << " ({ " ;
 				for (WordIndex j = 0 ; j < translations[i].size() ; j++)
@@ -205,6 +205,7 @@ void printAlignToFile(const Vector<WordIndex>& es,
       }
       of2 << '\n';
       }//我们的if分支的结尾
+	  
       else
       {
       of2 << "# Sentence pair (" << pair_no <<") source length " << l << " target length "<< m << 
