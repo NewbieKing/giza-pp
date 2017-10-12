@@ -144,6 +144,7 @@ void model2::em_loop(Perplexity& perp, sentenceHandler& sHandler1,
 		     bool dump_alignment, const char* alignfile, Perplexity& viterbi_perp, 
 		     bool test)
 {
+  //#define massert(expr) do {} while(0)
   massert( aTable.is_distortion==0 );
   massert( aCountTable.is_distortion==0 );
   WordIndex i, j, l, m ;
