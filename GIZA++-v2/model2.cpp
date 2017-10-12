@@ -216,9 +216,9 @@ void model2::em_loop(Perplexity& perp, sentenceHandler& sHandler1,
 	} // end of if (denom > 0)
       }// if (!test)
     } // end of for (j) ;
-    sHandler1.setProbOfSentence(sent,cross_entropy);
-    perp.addFactor(cross_entropy, so, l, m,1);
-    viterbi_perp.addFactor(log(viterbi_score), so, l, m,1);
+    sHandler1.setProbOfSentence(sent,cross_entropy); //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    perp.addFactor(cross_entropy, so, l, m,1);  //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    viterbi_perp.addFactor(log(viterbi_score), so, l, m,1); //@@@@@@@@@@@@@@@@@@@@@@@@@
     //同理这里的if条件也是不满足的
     if (dump_alignment||(FEWDUMPS&&sent.sentenceNo<1000) )
       printAlignToFile(es, fs, Elist.getVocabList(), Flist.getVocabList(), of2, viterbi_alignment, sent.sentenceNo, viterbi_score,"","");
@@ -226,9 +226,9 @@ void model2::em_loop(Perplexity& perp, sentenceHandler& sHandler1,
     pair_no++;
   } /* of while */
   sHandler1.rewind();
-  perp.record("Model2");
-  viterbi_perp.record("Model2");
-  errorReportAL(cout,"IBM-2");
+  perp.record("Model2"); //@@@@@@@@@@@@@@@@@@@
+  viterbi_perp.record("Model2"); //@@@@@@@@@@@@@@@@
+  errorReportAL(cout,"IBM-2"); 
 }
 
 
