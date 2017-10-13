@@ -600,7 +600,7 @@ double StartTesting(int &result)
    hmm h(m2);
    model3 m3(m2);
    //load基类report_info的数据成员
-   m3.load_para("parameters.file");
+   m3.load_parameters("parameters.file");
    //结束
 	
    if( HMM_Iterations>0 )
