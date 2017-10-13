@@ -26,6 +26,9 @@ USA.
 #include "HMMTables.h"
 #include "ForwardBackward.h"
 #include "Parameter.h"
+#include <iostream>
+#include <fstream>
+#include <sstream>
 
 #define CLASSIFY(i,empty,ianf) bool empty=(i>=l); unsigned int ianf=(i%l);
 #define CLASSIFY2(i,ianf) unsigned int ianf=(i%l);
@@ -417,6 +420,13 @@ void hmm::print_ttable(const char *filename)
 void hmm::print_atable(const char *filename)
 {
 	aTable.printTable(filename);
+}
+//这里又是我们新添加的函数
+void hmm::print_parameters(const char *filename)
+{
+	ofstream file(filename);
+	//打印sentenceHandler中的realCount
+	for(int i=0;i<)
 }
 
 #include "HMMTables.cpp"
