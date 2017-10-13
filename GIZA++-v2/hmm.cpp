@@ -427,9 +427,16 @@ void hmm::print_parameters(const char *filename)
 	ofstream file(filename);
 	//打印sentenceHandler中的realCount
 	file<<"realCount"<<endl;
-	for(int i=0;i < (*sHandler1.realCount).size();i++)
+        if(sHandler.realCount!=0)
 	{
-		file<< (*sHandler1.realCount)[i]<<" ";
+		for(int i=0;i < (*sHandler1.realCount).size();i++)
+		{
+			file<< (*sHandler1.realCount)[i]<<" ";
+		}
+	}
+	else
+	{
+		file<<"千山鸟飞绝,万径人踪灭";
 	}
 	file<<endl;
 	//打印sentenceHandler中的oldPairs参数
