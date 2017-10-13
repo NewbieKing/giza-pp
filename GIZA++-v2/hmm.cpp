@@ -427,22 +427,22 @@ void hmm::print_parameters(const char *filename)
 	ofstream file(filename);
 	//打印sentenceHandler中的realCount
 	file<<"realCount"<<endl;
-	for(int i=0;i < (*testHandler.realCount).size();i++)
+	for(int i=0;i < (*testHandler->realCount).size();i++)
 	{
-		file<< (*testHandler.realCount)[i]<<" ";
+		file<< (*testHandler->realCount)[i]<<" ";
 	}
 	file<<endl;
 	//打印sentenceHandler中的oldPairs参数
 	file<<"oldPairs"<<endl;
-	for(int i=0;i< testHandler.oldPairs.size();i++)
+	for(int i=0;i< (testHandler->oldPairs).size();i++)
 	{
-		testHandler.oldPairs[i].print_para(file);
+		(testHandler->oldPairs)[i].print_para(file);
 	}
 	//打印sentenceHandler中的oldProbs参数
 	file<<"oldProbs"<<endl;
-	for(int i=0;i< testHandler.oldProbs.size();i++)
+	for(int i=0;i< (testHandler->oldProbs).size();i++)
 	{
-		file<< testHandler.oldProbs[i]<<" ";
+		file<< (testHandler->oldProbs)[i]<<" ";
 	}
 	file<<endl;
 	
