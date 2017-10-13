@@ -119,10 +119,11 @@ public:
   bool readflag ; // true if you reach the end of file
   bool allInMemory ;
   int pair_no ;
+ 
   Vector<double> *realCount;
-
   Vector<sentPair> oldPairs;
   Vector<double> oldProbs;
+ 
   sentenceHandler(const char* filename, vcbList* elist=0, vcbList* flist=0);
   void rewind();
   bool getNextSentence(sentPair&, vcbList* = 0, vcbList* = 0);  // will be defined in the definition file, this
@@ -131,6 +132,8 @@ public:
   // method will read the next pair of sentence from memory buffer
   bool readNextSentence(sentPair&);  // will be defined in the definition file, this
   void setProbOfSentence(const sentPair&s,double d);
+ //下面是新定义的函数
+  void oldPairs_readPairs(string line2,string line3);
 };
 
 #endif
