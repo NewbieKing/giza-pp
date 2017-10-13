@@ -427,33 +427,33 @@ void hmm::print_parameters(const char *filename)
 	ofstream file(filename);
 	//打印sentenceHandler中的realCount
 	file<<"realCount"<<endl;
-	for(int i=0;i < (*testHandler->realCount).size();i++)
+	for(int i=0;i < (*sHandler1.realCount).size();i++)
 	{
-		file<< (*testHandler->realCount)[i]<<" ";
+		file<< (*sHandler1.realCount)[i]<<" ";
 	}
 	file<<endl;
 	//打印sentenceHandler中的oldPairs参数
 	file<<"oldPairs"<<endl;
-	for(int i=0;i< (testHandler->oldPairs).size();i++)
+	for(int i=0;i< (sHandler1.oldPairs).size();i++)
 	{
-		(testHandler->oldPairs)[i].print_para(file);
+		(sHandler1.oldPairs)[i].print_para(file);
 	}
 	file<<"oldPairs end"<<endl;
 	//打印sentenceHandler中的oldProbs参数
 	file<<"oldProbs"<<endl;
-	for(int i=0;i< (testHandler->oldProbs).size();i++)
+	for(int i=0;i< (sHandler1.oldProbs).size();i++)
 	{
-		file<< (testHandler->oldProbs)[i]<<" ";
+		file<< (sHandler1.oldProbs)[i]<<" ";
 	}
 	file<<endl;
 	
 	//打印我们的testPerp中的参数
 	file<<"testPerp"<<endl;
-	testPerp->print_para(file);
+	perp.print_para(file);
 	file<<endl;
 	//打印我们的testViterbiPerp中的参数
 	file<<"testViterbiPerp"<<endl;
-	testViterbiPerp->print_para(file);
+	trainViterbiPerp.print_para(file);
 	
 	
 	
