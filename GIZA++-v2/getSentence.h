@@ -75,6 +75,19 @@ class sentPair{
     { return sentenceNo; }
   double getCount()const
     { return realCount; }
+  void print_para(ofstream &file)
+  {
+      for(int i=0;i<eSent.size();i++)
+      {
+       file<<eSent[i]<<" ";
+      }
+       file<<endl;
+      for(int i=0;i<fSent.size();i++)
+      {
+       file<<fSent[i]<<" ";
+      }
+      file<<endl;
+  }
 };
 
 inline ostream&operator<<(ostream&of,const sentPair&s)
