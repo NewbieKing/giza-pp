@@ -35,6 +35,7 @@ USA.
 #define _PERPLEXITY_H
 
 #include <cmath>
+#include <sstream>
 #include <iostream>
 #include <fstream>
 #include "Vector.h"
@@ -119,6 +120,32 @@ class Perplexity {
 	    for(int i=0;i<ce.size();i++)
 	    {
 		    file<<ce[i]<<" ";
+	    }
+    }
+    //又是一个新函数
+    void load_para(fstream &file)
+    {
+	    string line5,line6,line7;
+	    stirng mid;
+	    double mperp;
+	    double mce;
+	    getline(file,line5);
+	    istringstream stream5(line5);
+	    while(stream5>>mid)
+	    {
+		    modelid.push_back(mid);
+	    }
+	    getline(file,line6);
+	    istringstream stream6(line6);
+	    whlie(stream6>>mperp)
+	    {
+		    perp.push_back(mperp);
+	    }
+	    getline(file,line7);
+	    istringstream stream7(line7);
+	    while(stream7>>mce)
+	    {
+		    ce.push_back(mce);
 	    }
     }
 };
