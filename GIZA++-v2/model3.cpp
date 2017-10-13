@@ -403,7 +403,8 @@ int model3::viterbi_test(int noIterationsModel3,int noIterationsModel4,int noIte
     p0_count = p1_count = 0;
 	  
 	  
-    #define TEST_ARGS_NEW  *testPerp, *testViterbiPerp, *testHandler, dump_files, test_alignfile.c_str(),false, modelName,final
+    #define TEST_ARGS_NEW  *testPerp, *testViterbiPerp, *testHandler, dump_files, test_alignfile.c_str(),true, modelName,final 
+    //注意这里倒数第三个bool值很重要，原先这里是false，导致测试结与训练结果有很大区别，现在改为true，结果还不错，但是还是存在一些区别
     switch( toModel )
       {
       case '3':
