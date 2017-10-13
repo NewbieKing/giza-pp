@@ -599,6 +599,9 @@ double StartTesting(int &result)
    //load结束
    hmm h(m2);
    model3 m3(m2);
+   //load基类report_info的数据成员
+   m3.load_para("parameters.file");
+   //结束
 	
    if( HMM_Iterations>0 )
        m3.setHMM(&h);
@@ -815,6 +818,8 @@ class Dictionary{
 	     h.print_ttable("ttable.file");
 	     h.print_atable("atable.file");
 	   }
+	   //这里是把基类report_info中的数据成员打印到文件中的操作
+             h.print_parameters("parameters.file");
 	    	 
 
 /*
