@@ -373,7 +373,7 @@ void hmm::em_loop(Perplexity& perp, sentenceHandler& sHandler1,
     cross_entropy+=log(max(trainProb,1e-100))+log(max(net->finalMultiply,1e-100));
     Array<int>vit;
     double viterbi_score=1.0;
-    if( (HMMTrainingSpecialFlags&1) )
+    if( (HMMTrainingSpecialFlags&1) ) //short HMMTrainingSpecialFlags=0; 所以这里走的是else分支
       HMMViterbi(*net,gamma,vit);
     else
       viterbi_score=HMMRealViterbi(*net,vit);
