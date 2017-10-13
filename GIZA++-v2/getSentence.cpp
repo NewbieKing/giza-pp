@@ -33,6 +33,7 @@ USA.
 #include "getSentence.h"
 #include <iostream>
 #include <sstream>
+#include <string>
 #include "Parameter.h"
 #include "errno.h"
 
@@ -93,6 +94,27 @@ sentenceHandler::sentenceHandler(const char*  filename, vcbList* elist,
   else
     realCount=0;
 }
+
+//下面是我们新定义的函数
+void sentenceHandler::oldPairs_readPairs(string line2,string line3)
+{
+	sentPair sent;
+	WordIndex index2;
+	WordIndex index3;
+	istringstream stream2(line2);
+	istringstream stream3(line3);
+	while(stream2>>index2)
+	{
+		sent.eSent.push_back(index2);
+	}
+	while(stream3>>index3)
+	{
+		sent.fSent.push_back(index3);
+	}
+	oldPairs.push_back(sent);
+}
+
+//结束
 
 void sentenceHandler::rewind() //倒带
 {
