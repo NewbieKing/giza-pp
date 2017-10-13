@@ -427,7 +427,7 @@ void hmm::print_parameters(const char *filename)
 	ofstream file(filename);
 	//打印sentenceHandler中的realCount
 	file<<"realCount"<<endl;
-        if(sHandler.realCount!=0)
+        if(sHandler1.realCount!=0)
 	{
 		for(int i=0;i < (*sHandler1.realCount).size();i++)
 		{
