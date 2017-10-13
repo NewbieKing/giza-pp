@@ -118,7 +118,7 @@ class Perplexity {
 	    file<<endl;
 	    for(int i=0;i<ce.size();i++)
 	    {
-		    file<<cd[i]<<" ";
+		    file<<ce[i]<<" ";
 	    }
     }
 };
