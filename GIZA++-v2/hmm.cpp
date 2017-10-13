@@ -378,6 +378,7 @@ void hmm::em_loop(Perplexity& perp, sentenceHandler& sHandler1,
       HMMViterbi(*net,gamma,vit);
     else
       viterbi_score=HMMRealViterbi(*net,vit);
+    //这个for循环不用管，在该循环中修改的变量viterbi_alignment只有在下面的一个if block中有用到，而这个if分支是进不去的，因为dump_alignment为false
     for(j=1;j<=m;j++)
       {
 	viterbi_alignment[j]=vit[j-1]+1;
@@ -390,9 +391,11 @@ void hmm::em_loop(Perplexity& perp, sentenceHandler& sHandler1,
     if( Verbose )
       cout << "Viterbi-perp: " << log(viterbi_score) << ' ' << log(max(net->finalMultiply,1e-100)) << ' ' << viterbi_score << ' ' << net->finalMultiply << ' ' << *net << "gamma: " << gamma << endl;
     delete net;net=0;
-    if (dump_alignment||(FEWDUMPS&&sent.getSentenceNo()<1000) )
+    
+    if (dump_alignment||(FEWDUMPS&&sent.getSentenceNo()<1000) ) //这个if分支进不去
       printAlignToFile(es, fs, Elist.getVocabList(), Flist.getVocabList(), of2, viterbi_alignment, sent.getSentenceNo(), viterbi_score,"","");
-    addAL(viterbi_alignment,sent.getSentenceNo(),l);    
+    addAL(viterbi_alignment,sent.getSentenceNo(),l);   
+    
     pair_no++;
   } /* of while */
   sHandler1.rewind();
