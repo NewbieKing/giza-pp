@@ -27,6 +27,10 @@ USA.
 #include "transpair_model5.h"
 #include "transpair_modelhmm.h"
 #include "Parameter.h"
+#include <fstream>
+#include <iostream>
+#include <sstream>
+#include <string>
 
 #define TRICKY_IBM3_TRAINING
 
@@ -47,6 +51,65 @@ model3::model3(model2& m2) :
   nTable(m2.getNoEnglishWords()+1, MAX_FERTILITY), 
   nCountTable(m2.getNoEnglishWords()+1, MAX_FERTILITY),h(0)
 {}
+
+
+//这里是我们从parameters.file文件中读取数据到基类report_info对象中的函数
+void model3::load_para(const char *filename)
+{
+	fstream file(filename);
+	string line;
+	while(getline(file,line))
+	{
+		if(line=="realCount")
+		{
+			string line1;
+			double count;
+			getline(file,line1);
+			istringstream stream1(line1);
+			testHandler->realCount=new vector<double>;
+			while(stream1>>count)
+			{
+				(*testHandler->realCount).push_back(count);
+			}
+			
+		}
+		if(line=="oldPairs")
+		{
+			string line2;
+			string line3;
+			WordIndex index2;
+			WordIndex index3;
+			getline(file,line2);
+			while(line2!="oldPairs end")
+			{
+				getline(file,line3);
+				testHandler->oldPairs_readPairs(line2,line3);
+				getline(file,line2);
+			}	
+		}
+		if(line=="oldProbs")
+		{
+			string line4;
+			double prob;
+			getline(file,line4);
+			istringstream stream4(line4);
+			while(stream4>>prob)
+			{
+				(testHandler->oldProbs).push_back(prob);
+			}
+		}
+		//下面则是关于testPerp和testViterbiPerp的数据成员了
+		if(line=="testPerp")
+		{
+			testPerp->load_para(file);
+		}
+		if(line=="testViterbiPerp")
+		{
+			testViterbiPerp->load_para(file);
+		}
+		
+	}
+}
 
 
 
