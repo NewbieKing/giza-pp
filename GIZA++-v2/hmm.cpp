@@ -87,6 +87,7 @@ int hmm::em_with_tricks(int noIterations)
     pair_no = 0;
     it_st = time(NULL) ;
     cout << endl << "-----------\n" << modelName << ": Iteration " << it << '\n';
+    //GLOBAL_PARAMETER2(int,ModelH_Dump_Freq,"HMM DUMP FREQUENCY","th","dump frequency of HMM",PARLEV_OUTPUT,0); int dumpFreq=ModelH_Dump_Freq;
     dump_files = (dumpFreq != 0) && ((it % dumpFreq) == 0) && !NODUMPS; //dump_files一直为false
     number = "";
     int n = it;
@@ -270,7 +271,7 @@ void hmm::em_loop(Perplexity& perp, sentenceHandler& sHandler1,
   viterbi_perp.clear(); //################
   ofstream of2;
   // for each sentence pair in the corpus
-  if (dump_alignment||FEWDUMPS )
+  if (dump_alignment||FEWDUMPS ) //这里的dump_alignment是从em_with_tricks函数传过来的参数dump_files，而dump_files一直都为false
     of2.open(alignfile);
   sentPair sent ;
   sHandler1.rewind();
