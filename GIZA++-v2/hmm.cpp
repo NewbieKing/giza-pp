@@ -383,9 +383,9 @@ void hmm::em_loop(Perplexity& perp, sentenceHandler& sHandler1,
 	if( viterbi_alignment[j]>l)
 	  viterbi_alignment[j]=0;
       }
-    sHandler1.setProbOfSentence(sent,cross_entropy);
-    perp.addFactor(cross_entropy, so, l, m,1);
-    viterbi_perp.addFactor(log(viterbi_score)+log(max(net->finalMultiply,1e-100)), so, l, m,1);
+    sHandler1.setProbOfSentence(sent,cross_entropy); //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    perp.addFactor(cross_entropy, so, l, m,1); //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    viterbi_perp.addFactor(log(viterbi_score)+log(max(net->finalMultiply,1e-100)), so, l, m,1); //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     if( Verbose )
       cout << "Viterbi-perp: " << log(viterbi_score) << ' ' << log(max(net->finalMultiply,1e-100)) << ' ' << viterbi_score << ' ' << net->finalMultiply << ' ' << *net << "gamma: " << gamma << endl;
     delete net;net=0;
@@ -395,8 +395,8 @@ void hmm::em_loop(Perplexity& perp, sentenceHandler& sHandler1,
     pair_no++;
   } /* of while */
   sHandler1.rewind();
-  perp.record("HMM");
-  viterbi_perp.record("HMM");
+  perp.record("HMM"); //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+  viterbi_perp.record("HMM"); //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
   errorReportAL(cout,"HMM");
 }
 
