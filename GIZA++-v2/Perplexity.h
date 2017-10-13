@@ -35,6 +35,7 @@ USA.
 #define _PERPLEXITY_H
 
 #include <cmath>
+#include <iostream>
 #include <fstream>
 #include "Vector.h"
 #include "defs.h"
@@ -102,6 +103,24 @@ class Perplexity {
     friend void generatePerplexityReport(const Perplexity&, const Perplexity&, 
 					 const Perplexity&, const Perplexity&, 
 					 ostream&, int, int, bool); 
+    //下面是我们新定义的函数
+    void print_para(ofstream &file)
+    {
+	    for(int i=0;i<modelid.size();i++)
+	    {
+		    file<<modelid[i]<<" ";
+	    }
+	    file<<endl;
+	    for(int i=0;i<perp.size();i++)
+	    {
+		    file<<perp[i]<<" ";
+	    }
+	    file<<endl;
+	    for(int i=0;i<ce.size();i++)
+	    {
+		    file<<cd[i]<<" ";
+	    }
+    }
 };
 
 
