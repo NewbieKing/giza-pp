@@ -126,7 +126,7 @@ class Perplexity {
     void load_para(fstream &file)
     {
 	    string line5,line6,line7;
-	    stirng mid;
+	    string mid;
 	    double mperp;
 	    double mce;
 	    getline(file,line5);
@@ -137,7 +137,7 @@ class Perplexity {
 	    }
 	    getline(file,line6);
 	    istringstream stream6(line6);
-	    whlie(stream6>>mperp)
+	    while(stream6>>mperp)
 	    {
 		    perp.push_back(mperp);
 	    }
