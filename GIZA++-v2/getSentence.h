@@ -75,6 +75,7 @@ class sentPair{
     { return sentenceNo; }
   double getCount()const
     { return realCount; }
+  //下面是新加的函数
   void print_para(ofstream &file)
   {
       for(int i=0;i<eSent.size();i++)
