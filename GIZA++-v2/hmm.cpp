@@ -287,11 +287,15 @@ void hmm::em_loop(Perplexity& perp, sentenceHandler& sHandler1,
     unsigned int I=2*l,J=m;
     bool DependencyOfJ=(CompareAlDeps&(16|8))||(PredictionInAlignments==2);
     bool DependencyOfPrevAJ=(CompareAlDeps&(2|4))||(PredictionInAlignments==0);
-    HMMNetwork *net=makeHMMNetwork(es,fs,doInit);
+    
+    HMMNetwork *net=makeHMMNetwork(es,fs,doInit); //######################################
+    
     Array<double> gamma;
     Array<Array2<double> > epsilon(DependencyOfJ?(m-1):1);
     double trainProb;
-      trainProb=ForwardBackwardTraining(*net,gamma,epsilon);
+    
+    trainProb=ForwardBackwardTraining(*net,gamma,epsilon); //########################################
+    
     if( !test )
       {
 	double *gp=conv<double>(gamma.begin());
