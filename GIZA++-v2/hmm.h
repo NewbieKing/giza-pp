@@ -80,6 +80,8 @@ class hmm : public model2
   //这里添加两个用于把table打印到文件的函数
   void print_ttable(const char *filename);
   void print_atable(const char *filename);
+  //这里再添加一个把参数打印到文件的函数
+  void print_parameters(const char *filename);
 };
 
 #endif
