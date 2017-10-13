@@ -438,6 +438,7 @@ void hmm::print_parameters(const char *filename)
 	{
 		(testHandler->oldPairs)[i].print_para(file);
 	}
+	file<<"oldPairs end"<<endl;
 	//打印sentenceHandler中的oldProbs参数
 	file<<"oldProbs"<<endl;
 	for(int i=0;i< (testHandler->oldProbs).size();i++)
