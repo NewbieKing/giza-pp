@@ -54,7 +54,7 @@ model3::model3(model2& m2) :
 
 
 //这里是我们从parameters.file文件中读取数据到基类report_info对象中的函数
-void model3::load_para(const char *filename)
+void model3::load_parameters(const char *filename)
 {
 	fstream file(filename);
 	string line;
