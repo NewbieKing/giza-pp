@@ -448,11 +448,11 @@ void hmm::print_parameters(const char *filename)
 	
 	//打印我们的testPerp中的参数
 	file<<"testPerp"<<endl;
-	testPerp.print_para(file);
+	testPerp->print_para(file);
 	file<<endl;
 	//打印我们的testViterbiPerp中的参数
 	file<<"testViterbiPerp"<<endl;
-	testViterbiPerp.print_para(file);
+	testViterbiPerp->print_para(file);
 	
 	
 	
