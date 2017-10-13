@@ -65,11 +65,14 @@ void model3::load_parameters(const char *filename)
 			string line1;
 			double count;
 			getline(file,line1);
-			istringstream stream1(line1);
-			testHandler->realCount=new vector<double>;
-			while(stream1>>count)
+			if(line1!="千山鸟飞绝,万径人踪灭")
 			{
-				(*testHandler->realCount).push_back(count);
+				istringstream stream1(line1);
+				testHandler->realCount=new vector<double>;
+				while(stream1>>count)
+				{
+					(*testHandler->realCount).push_back(count);
+				}
 			}
 			
 		}
