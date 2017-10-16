@@ -150,7 +150,7 @@ void printAlignToFile(const Vector<WordIndex>& es,
       while(tar>>word2)
 	      	tar_list.push_back(word2);
       vector<bool> incre_flag_list(tar_list.size());
-      vector<bool> find_flag_list(m);
+      vector<bool> find_flag_list(m+1);
       //下面是输出内容
       of2 << "# Sentence pair (" << pair_no <<") source length " << l << " target length "<< m << 
 	" alignment score : "<< alignment_score << '\n';
