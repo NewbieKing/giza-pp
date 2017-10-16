@@ -149,7 +149,8 @@ void printAlignToFile(const Vector<WordIndex>& es,
       		sou_list.push_back(word1);
       while(tar>>word2)
 	      	tar_list.push_back(word2);
-      vector<bool> flag_list(tar_list.size());
+      vector<bool> incre_flag_list(tar_list.size());
+      vector<bool> find_flag_list(m);
       //下面是输出内容
       of2 << "# Sentence pair (" << pair_no <<") source length " << l << " target length "<< m << 
 	" alignment score : "<< alignment_score << '\n';
@@ -160,7 +161,7 @@ void printAlignToFile(const Vector<WordIndex>& es,
 	   //注意这里我们的每个tar_list[k]是有汉语，而一个汉字所占用的不是一个char字符位置
  	     {
 		     of2<<tar_list[k]<<"!@#"<<" "; 
-	             flag_list[k]=1;
+	             incre_flag_list[k]=1;
 	     }
  	     else
 	    {
@@ -170,10 +171,14 @@ void printAlignToFile(const Vector<WordIndex>& es,
 		{
 			if(fvlist[fs[j]].word+"1"==tar_list[k])
 			{
-	 			of2 << fvlist[fs[j]].word << " " ;
-				for(int p=0;p<k;p++)
-					incre+=flag_list[p];
-				translations[viterbi_alignment[j]].push_back(j+incre); //计算得到的位置应该是j，而把oov加回来后，偏移为j+incre
+	 			if(find_flag_list[j]==0)
+				{
+					of2 << fvlist[fs[j]].word << " " ;
+					for(int p=0;p<k;p++)
+						incre+=incre_flag_list[p];
+					translations[viterbi_alignment[j]].push_back(j+incre); //计算得到的位置应该是j，而把oov加回来后，偏移为j+incre
+					find_flag_list[j]=1;
+				}
 			}
 		}
 	    }
