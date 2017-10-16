@@ -208,7 +208,10 @@ bool sentenceHandler::getNextSentence(sentPair& sent, vcbList* elist, vcbList* f
     readflag = true ;
     return(false);
   }
+	
+  //同样的核心部分，已知currentSentence==0,所以这里是把Buffer的第一个sentPair赋予sent
   sent = Buffer[currentSentence++] ;
+  
   if( sent.noOcc<0 && realCount )
     {
       if( Manlexfactor1 && sent.noOcc==-1.0 )
