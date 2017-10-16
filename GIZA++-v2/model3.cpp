@@ -645,6 +645,7 @@ model3::model3(model2& m2) :
     
 #define TRAIN_ARGS perp,      trainViterbiPerp, sHandler1,    dump_files, alignfile.c_str(),     true,  modelName,final
 #define TEST_ARGS  *testPerp, *testViterbiPerp, *testHandler, dump_files, test_alignfile.c_str(),false, modelName,final
+//然而这样的设置在我们的训练步骤则是没有问题的，C和TC对应的A3.final文件对于同一snt的对齐结果是完全相同的
 
 // char fromModel=trainingString[it-1];
 // char toModel=trainingString[it];
