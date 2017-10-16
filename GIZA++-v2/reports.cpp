@@ -150,7 +150,8 @@ void printAlignToFile(const Vector<WordIndex>& es,
       while(tar>>word2)
 	      	tar_list.push_back(word2);
       vector<bool> incre_flag_list(tar_list.size());
-      vector<bool> find_flag_list(m+1);
+      vector<bool> tfind_flag_list(m+1);
+      vector<bool> sfind_flag_list(l+1);
       //下面是输出内容
       of2 << "# Sentence pair (" << pair_no <<") source length " << l << " target length "<< m << 
 	" alignment score : "<< alignment_score << '\n';
@@ -171,13 +172,13 @@ void printAlignToFile(const Vector<WordIndex>& es,
 		{
 			if(fvlist[fs[j]].word+"1"==tar_list[k])
 			{
-	 			if(find_flag_list[j]==0)
+	 			if(tfind_flag_list[j]==0)
 				{
 					of2 << fvlist[fs[j]].word << " " ;
 					for(int p=0;p<k;p++)
 						incre+=incre_flag_list[p];
 					translations[viterbi_alignment[j]].push_back(j+incre); //计算得到的位置应该是j，而把oov加回来后，偏移为j+incre
-					find_flag_list[j]=1;
+					tfind_flag_list[j]=1;
 					break;
 				}
 			}
@@ -202,10 +203,15 @@ void printAlignToFile(const Vector<WordIndex>& es,
 		{
 			if(evlist[es[i]].word+"1"==sou_list[k])
 			{
-				of2 << evlist[es[i]].word << " ({ " ;
-				for (WordIndex j = 0 ; j < translations[i].size() ; j++)
-	  				of2 << translations[i][j] << " " ;
-				of2 << "}) ";
+				if(sfind_flag_list[j]==0)
+				{
+					of2 << evlist[es[i]].word << " ({ " ;
+					for (WordIndex j = 0 ; j < translations[i].size() ; j++)
+	  					of2 << translations[i][j] << " " ;
+					of2 << "}) ";
+					sfind_flag_list[j]=1;
+					break;
+				}
 			}
 		}
 	}
