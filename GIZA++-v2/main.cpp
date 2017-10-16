@@ -138,6 +138,7 @@ bool FEWDUMPS=0;
 //下面是我们新增的全局变量
 bool newflag=0;
 bool oovflag=0;
+bool resizeflag=0;
 //结束
 GLOBAL_PARAMETER(bool,ONLYALDUMPS,"ONLYALDUMPS","1: do not write any files",PARLEV_OUTPUT,0);
 GLOBAL_PARAMETER(short,CompactAlignmentFormat,"CompactAlignmentFormat","0: detailled alignment format, 1: compact alignment format ",PARLEV_OUTPUT,0);
