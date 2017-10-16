@@ -464,7 +464,7 @@ void model3::viterbi_loop_with_tricks(Perplexity& perp, Perplexity& viterbiPerp,
   //结束
   while(sHandler1.getNextSentence(sent)){
     //if( sent.eSent.size()==1||sent.fSent.size()==1 ) //注意我们在getNextSentence中对sent.eSent和sent.fSent都是先push进一个0,所以这里的意思是如果它们两个读到的是空行，则直接略过该循环下面的部分
-    // continue;
+    // continue; 但是为了解决我们oov时的空行问题，只能把这里注释掉了
     //新加的部分
     getSent_line_num++;
     //结束
