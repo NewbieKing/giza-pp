@@ -139,7 +139,7 @@ void printAlignToFile(const Vector<WordIndex>& es,
     }
   else //走这个
     {
-      if(newflag&&oovflag&&(sou_sent!="")&&(tar_sent!=""))
+      if(newflag&&oovflag)
       {
       vector<string> sou_list,tar_list;
       string word1,word2;
