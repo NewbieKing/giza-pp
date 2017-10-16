@@ -103,6 +103,7 @@ void  printSentencePair(Vector<WordIndex>& es,
 
 extern bool newflag;
 extern bool oovflag;
+extern bool resizeflag;
 extern short CompactAlignmentFormat;
 //该函数是打印一个sentence pair的alignment结果
 void printAlignToFile(const Vector<WordIndex>& es, 
@@ -185,6 +186,8 @@ void printAlignToFile(const Vector<WordIndex>& es,
 		}
 	    }
       } 
+      if(resizeflag==1)
+	      of2<<"	the pair has been resized!";
       of2 << '\n';
       
       //source sentence
@@ -215,6 +218,11 @@ void printAlignToFile(const Vector<WordIndex>& es,
 			}
 		}
 	}
+      }
+      if(resizedflag==1)
+      {
+	      of2<<"	the pair has been resized!";
+	      resizeflag=0;
       }
       of2 << '\n';
       }//我们的if分支的结尾
