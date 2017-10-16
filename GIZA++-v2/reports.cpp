@@ -219,7 +219,7 @@ void printAlignToFile(const Vector<WordIndex>& es,
 		}
 	}
       }
-      if(resizedflag==1)
+      if(resizeflag==1)
       {
 	      of2<<"	the pair has been resized!";
 	      resizeflag=0;
