@@ -203,13 +203,13 @@ void printAlignToFile(const Vector<WordIndex>& es,
 		{
 			if(evlist[es[i]].word+"1"==sou_list[k])
 			{
-				if(sfind_flag_list[j]==0)
+				if(sfind_flag_list[i]==0)
 				{
 					of2 << evlist[es[i]].word << " ({ " ;
 					for (WordIndex j = 0 ; j < translations[i].size() ; j++)
 	  					of2 << translations[i][j] << " " ;
 					of2 << "}) ";
-					sfind_flag_list[j]=1;
+					sfind_flag_list[i]=1;
 					break;
 				}
 			}
