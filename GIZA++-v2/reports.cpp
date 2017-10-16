@@ -178,6 +178,7 @@ void printAlignToFile(const Vector<WordIndex>& es,
 						incre+=incre_flag_list[p];
 					translations[viterbi_alignment[j]].push_back(j+incre); //计算得到的位置应该是j，而把oov加回来后，偏移为j+incre
 					find_flag_list[j]=1;
+					break;
 				}
 			}
 		}
