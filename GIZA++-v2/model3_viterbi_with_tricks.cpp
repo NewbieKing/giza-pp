@@ -458,9 +458,16 @@ void model3::viterbi_loop_with_tricks(Perplexity& perp, Perplexity& viterbiPerp,
   viterbiPerp.clear() ; // clears cross_entrop & perplexity 
   sentPair sent ;
   int NCenter=0,NHillClimbed=0,NAlignment=0,NTotal=0,NBetterByPegging=0;
+  //又是我们新加的部分
+  int getSent_line_num=0;
+  int read_line_num=0;
+  //结束
   while(sHandler1.getNextSentence(sent)){
     if( sent.eSent.size()==1||sent.fSent.size()==1 )
       continue;
+    //新加的部分
+    getSent_line_num++;
+    //结束
     SentNr=sent.sentenceNo;
     Vector<WordIndex>& es = sent.eSent;
     Vector<WordIndex>& fs = sent.fSent;
@@ -613,6 +620,7 @@ void model3::viterbi_loop_with_tricks(Perplexity& perp, Perplexity& viterbiPerp,
       {
 	      getline(sou_check,sou_sent);
 	      getline(tar_check,tar_sent);
+	      read_line_num++;
       }
 
       //这里FEWDUMPS,ONLYALDUMPS初值都为0（DUMPS初值也为0）
@@ -703,7 +711,13 @@ void model3::viterbi_loop_with_tricks(Perplexity& perp, Perplexity& viterbiPerp,
     //关闭我们的文件
     sou_check.close();
     tar_check.close();
-    //ok，这是一块
+    //结束
+    //新加的部分
+    ofstream vali("./validate.txt");
+    vali<<"我们的getNextSentence执行的次数"<<getSent_line_num<<endl;
+    vali<<"我们的自己加的从文件中读取sent的次数"<<read_line_num<<endl;
+    vali.close();
+    //结束
     double FSent=pair_no;
     cout << "#centers(pre/hillclimbed/real): " << NAlignment/FSent << " " << NHillClimbed/FSent << " " << NCenter/FSent << "  #al: " << NTotal/FSent << " #alsophisticatedcountcollection: " <<   NumberOfAlignmentsInSophisticatedCountCollection/FSent << " #hcsteps: " << HillClimbingSteps/FSent << '\n';
     cout << "#peggingImprovements: " << NBetterByPegging/FSent << '\n';
