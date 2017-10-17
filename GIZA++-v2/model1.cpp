@@ -278,7 +278,7 @@ void model1::em_loop(int it,Perplexity& perp, sentenceHandler& sHandler1, bool s
     perp.addFactor(cross_entropy-m*log(l+1.0), so, l, m,1); //可疑修改地点@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     viterbi_perp.addFactor(log(viterbi_score)-m*log(l+1.0), so, l, m,1); //可疑修改地点@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     if (dump_alignment||(FEWDUMPS&&sent.sentenceNo<1000)) //同理，这里dump_alignment和FEWDUMPS是false，所以该if的block不执行
-      printAlignToFile(es, fs, evlist, fvlist, of2, viterbi_alignment, sent.sentenceNo, viterbi_score,"","");
+      printAlignToFile(es, fs, evlist, fvlist, of2, viterbi_alignment, sent.sentenceNo, viterbi_score,"","",sHandler1);
     addAL(viterbi_alignment,sent.sentenceNo,l);
     pair_no++;
   } /* of while */
