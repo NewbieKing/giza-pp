@@ -159,7 +159,9 @@ bool sentenceHandler::getNextSentence(sentPair& sent, vcbList* elist, vcbList* f
     currentSentence = 0 ;
     Buffer.clear();
     cout << "Reading more sentence pairs into memory ... \n";
+    //由这个while循环可见getNextSentence函数的是先把corpus中的pair先全部读到sentenceHandler的buffer中，然后返回buffer的第currentSentence个pair!
     while((noSentInBuffer < TRAIN_BUFFER_SIZE) && readNextSentence(s)){
+	    
       //这个if先不要管，虽然我们可能会走进这个block，但这个block中除了一个resize操作其它都是log型的指令
       if ((s.fSent.size()-1) > (MAX_FERTILITY-1) * (s.eSent.size()-1)){
 	cerr << "WARNING: The following sentence pair has source/target sentence length ration more than\n"<<
