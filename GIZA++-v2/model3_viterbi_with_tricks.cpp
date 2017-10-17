@@ -722,6 +722,9 @@ void model3::viterbi_loop_with_tricks(Perplexity& perp, Perplexity& viterbiPerp,
     vali<<"我们的自己加的从文件中读取sent的次数"<<read_line_num<<endl;
     vali.close();
     //结束
+    //新加
+    dump_flag=0;
+    //结束
     double FSent=pair_no;
     cout << "#centers(pre/hillclimbed/real): " << NAlignment/FSent << " " << NHillClimbed/FSent << " " << NCenter/FSent << "  #al: " << NTotal/FSent << " #alsophisticatedcountcollection: " <<   NumberOfAlignmentsInSophisticatedCountCollection/FSent << " #hcsteps: " << HillClimbingSteps/FSent << '\n';
     cout << "#peggingImprovements: " << NBetterByPegging/FSent << '\n';
