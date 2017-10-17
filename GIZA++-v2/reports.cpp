@@ -112,7 +112,7 @@ void printAlignToFile(const Vector<WordIndex>& es,
 		      const Vector<WordEntry>& fvlist, 
 		      ostream& of2, 
 		      const Vector<WordIndex>& viterbi_alignment, 
-		      int pair_no, double alignment_score,string sou_sent,string tar_sent)
+		      int pair_no, double alignment_score,string sou_sent,string tar_sent,sentenceHandler& sHandler1)
      
      // prints the given alignment to alignments file (given it stream pointer)
      // in a format recognizable by the draw-alignment tool ... which is of the
@@ -186,7 +186,7 @@ void printAlignToFile(const Vector<WordIndex>& es,
 		}
 	    }
       } 
-      if(resizeflag)
+      if(resizeflag_vec[sHandler1.currentSentence-1])
 		of2<<"the pair has been resized!";
       of2 << '\n';
       
@@ -219,7 +219,7 @@ void printAlignToFile(const Vector<WordIndex>& es,
 		}
 	}
       }
-      if(resizeflag)
+      if(resizeflag_vec[sHandler1.currentSentence-1])
 		of2<<"the pair has been resized!";
       resizeflag=0;
       of2 << '\n';
