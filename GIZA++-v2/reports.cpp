@@ -103,9 +103,9 @@ void  printSentencePair(Vector<WordIndex>& es,
 
 extern bool newflag;
 extern bool oovflag;
-extern vector<bool> resizeflag_vec;
-extern int cur;
-extern bool dump_flag;
+//extern vector<bool> resizeflag_vec;
+//extern int cur;
+//extern bool dump_flag;
 extern short CompactAlignmentFormat;
 //该函数是打印一个sentence pair的alignment结果
 void printAlignToFile(const Vector<WordIndex>& es, 
