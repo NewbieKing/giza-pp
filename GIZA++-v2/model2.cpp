@@ -221,7 +221,7 @@ void model2::em_loop(Perplexity& perp, sentenceHandler& sHandler1,
     viterbi_perp.addFactor(log(viterbi_score), so, l, m,1); //@@@@@@@@@@@@@@@@@@@@@@@@@
     //同理这里的if条件也是不满足的
     if (dump_alignment||(FEWDUMPS&&sent.sentenceNo<1000) )
-      printAlignToFile(es, fs, Elist.getVocabList(), Flist.getVocabList(), of2, viterbi_alignment, sent.sentenceNo, viterbi_score,"","");
+      printAlignToFile(es, fs, Elist.getVocabList(), Flist.getVocabList(), of2, viterbi_alignment, sent.sentenceNo, viterbi_score,"","",sHandler1);
     addAL(viterbi_alignment,sent.sentenceNo,l);
     pair_no++;
   } /* of while */
