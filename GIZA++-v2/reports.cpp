@@ -105,6 +105,7 @@ extern bool newflag;
 extern bool oovflag;
 extern vector<bool> resizeflag_vec;
 extern int cur;
+extern dump_flag;
 extern short CompactAlignmentFormat;
 //该函数是打印一个sentence pair的alignment结果
 void printAlignToFile(const Vector<WordIndex>& es, 
@@ -187,7 +188,7 @@ void printAlignToFile(const Vector<WordIndex>& es,
 		}
 	    }
       } 
-      if(resizeflag_vec[cur-1])
+      if(dump_flag&&resizeflag_vec[cur-1])
 		of2<<"the pair has been resized!";
       of2 << '\n';
       
@@ -220,7 +221,7 @@ void printAlignToFile(const Vector<WordIndex>& es,
 		}
 	}
       }
-      if(resizeflag_vec[cur-1])
+      if(dump_flag&&resizeflag_vec[cur-1])
 		of2<<"the pair has been resized!";
       of2 << '\n';
       }//我们的if分支的结尾
