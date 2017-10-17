@@ -40,6 +40,7 @@ USA.
 
 int PrintedTooLong=0;
 extern vector<bool> resizeflag_vec;
+extern int cur;
 
 /* -------------- Method Defnitions for Class sentenceHandler ---------------*/
 
@@ -218,7 +219,9 @@ bool sentenceHandler::getNextSentence(sentPair& sent, vcbList* elist, vcbList* f
   }
 	
   //同样的核心部分，已知currentSentence==0,所以这里是把Buffer的第一个sentPair赋予sent
-  sent = Buffer[currentSentence++] ;
+  sent = Buffer[currentSentence++] ; 
+  //新加的
+  cur++;
   
   if( sent.noOcc<0 && realCount )
     {
