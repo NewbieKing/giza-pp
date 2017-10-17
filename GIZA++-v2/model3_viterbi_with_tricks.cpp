@@ -36,6 +36,7 @@ USA.
 
 extern bool newflag;
 extern bool oovflag;
+extern int cur;
 GLOBAL_PARAMETER(float,PrintN,"nbestalignments","for printing the n best alignments",PARLEV_OUTPUT,0);
 
 const short LogHillClimb=0,LogPeg=0;
@@ -461,6 +462,7 @@ void model3::viterbi_loop_with_tricks(Perplexity& perp, Perplexity& viterbiPerp,
   //又是我们新加的部分
   int getSent_line_num=0;
   int read_line_num=0;
+  cur=0;
   //结束
   while(sHandler1.getNextSentence(sent)){
     //if( sent.eSent.size()==1||sent.fSent.size()==1 ) //注意我们在getNextSentence中对sent.eSent和sent.fSent都是先push进一个0,所以这里的意思是如果它们两个读到的是空行，则直接略过该循环下面的部分
@@ -626,7 +628,7 @@ void model3::viterbi_loop_with_tricks(Perplexity& perp, Perplexity& viterbiPerp,
       //这里FEWDUMPS,ONLYALDUMPS初值都为0（DUMPS初值也为0）
       if (dump_files||(FEWDUMPS&&sent.sentenceNo<1000)||(final&&(ONLYALDUMPS)) )//这里很明显只有在dump_files为true的情况下才会进行，而dump_files为true即是我们之前的final为true，循环进行到最后一轮
 	printAlignToFile(es, fs, Elist.getVocabList(), Flist.getVocabList(), of2, (setOfGoodCenters[bestAlignment].first)->getAlignment(), pair_no, 
-			 setOfGoodCenters[bestAlignment].second,sou_sent,tar_sent,sHandler1);
+			 setOfGoodCenters[bestAlignment].second,sou_sent,tar_sent);
       //这里的es和fs分别是source sentence和target sentence(我们从corpus.snt中读取的sentence pair)，它的表示形式是用词id表示的
       //Elist和Flist则是我们的model3从model1继承而来的数据成员，都是vcbList类型。
 	  
@@ -668,7 +670,7 @@ void model3::viterbi_loop_with_tricks(Perplexity& perp, Perplexity& viterbiPerp,
 		}
 	      if( of3&&i<PrintN )
 		printAlignToFile(es, fs, Elist.getVocabList(), Flist.getVocabList(),*of3,x.getAlignment(), pair_no, 
-				 als[i].v/sum*count,"","",sHandler1);
+				 als[i].v/sum*count,"","");
 	      sum2+=als[i].v;
 	      if( writeNBestErrorsFile )
 		{
