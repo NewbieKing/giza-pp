@@ -162,7 +162,8 @@ bool sentenceHandler::getNextSentence(sentPair& sent, vcbList* elist, vcbList* f
     currentSentence = 0 ;
     Buffer.clear();
     cout << "Reading more sentence pairs into memory ... \n";
-    //由这个while循环可见getNextSentence函数的是先把corpus中的pair先全部读到sentenceHandler的buffer中，然后返回buffer的第currentSentence个pair!
+    //由这个while循环可见getNextSentence函数的是先把corpus中的pair先通过readNextSentence循环读到sentenceHandler的buffer中,同时利用buffer中的
+    //第一个元素修改sent，而下次再调用该函数时，由于currentSentence<noSentenceInBuffer,所以if条件不成立，就不走这个while循环了！
     while((noSentInBuffer < TRAIN_BUFFER_SIZE) && readNextSentence(s)){
 	    
       //这个if先不要管，虽然我们可能会走进这个block，但这个block中除了一个resize操作其它都是log型的指令
