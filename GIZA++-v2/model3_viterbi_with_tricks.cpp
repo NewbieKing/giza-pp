@@ -37,6 +37,7 @@ USA.
 extern bool newflag;
 extern bool oovflag;
 extern int cur;
+extern bool dump_flag;
 GLOBAL_PARAMETER(float,PrintN,"nbestalignments","for printing the n best alignments",PARLEV_OUTPUT,0);
 
 const short LogHillClimb=0,LogPeg=0;
@@ -463,6 +464,7 @@ void model3::viterbi_loop_with_tricks(Perplexity& perp, Perplexity& viterbiPerp,
   int getSent_line_num=0;
   int read_line_num=0;
   cur=0;
+  dump_flag=dump_files;
   //结束
   while(sHandler1.getNextSentence(sent)){
     //if( sent.eSent.size()==1||sent.fSent.size()==1 ) //注意我们在getNextSentence中对sent.eSent和sent.fSent都是先push进一个0,所以这里的意思是如果它们两个读到的是空行，则直接略过该循环下面的部分
