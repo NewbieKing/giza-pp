@@ -104,6 +104,7 @@ void  printSentencePair(Vector<WordIndex>& es,
 extern bool newflag;
 extern bool oovflag;
 extern vector<bool> resizeflag_vec;
+extern int cur;
 extern short CompactAlignmentFormat;
 //该函数是打印一个sentence pair的alignment结果
 void printAlignToFile(const Vector<WordIndex>& es, 
@@ -112,7 +113,7 @@ void printAlignToFile(const Vector<WordIndex>& es,
 		      const Vector<WordEntry>& fvlist, 
 		      ostream& of2, 
 		      const Vector<WordIndex>& viterbi_alignment, 
-		      int pair_no, double alignment_score,string sou_sent,string tar_sent,sentenceHandler& sHandler1)
+		      int pair_no, double alignment_score,string sou_sent,string tar_sent)
      
      // prints the given alignment to alignments file (given it stream pointer)
      // in a format recognizable by the draw-alignment tool ... which is of the
@@ -186,7 +187,7 @@ void printAlignToFile(const Vector<WordIndex>& es,
 		}
 	    }
       } 
-      if(resizeflag_vec[sHandler1.currentSentence-1])
+      if(resizeflag_vec[cur-1])
 		of2<<"the pair has been resized!";
       of2 << '\n';
       
@@ -219,7 +220,7 @@ void printAlignToFile(const Vector<WordIndex>& es,
 		}
 	}
       }
-      if(resizeflag_vec[sHandler1.currentSentence-1])
+      if(resizeflag_vec[cur-1])
 		of2<<"the pair has been resized!";
       of2 << '\n';
       }//我们的if分支的结尾
