@@ -41,6 +41,7 @@ USA.
 int PrintedTooLong=0;
 extern vector<bool> resizeflag_vec;
 extern int cur;
+extern bool dump_flag;
 
 /* -------------- Method Defnitions for Class sentenceHandler ---------------*/
 
@@ -176,10 +177,12 @@ bool sentenceHandler::getNextSentence(sentPair& sent, vcbList* elist, vcbList* f
 	s.eSent.resize(min(s.eSent.size(),s.fSent.size()));
 	s.fSent.resize(min(s.eSent.size(),s.fSent.size()));
 	//新加的
-	resizeflag_vec.push_back(1);
+	if(dump_flag)
+		resizeflag_vec.push_back(1);
       }
       //新加的
-      resizeflag_vec.push_back(0);
+      if(dump_flag)
+      		resizeflag_vec.push_back(0);
 	    
       Buffer.push_back(s) ; //这是核心部分
 	    
