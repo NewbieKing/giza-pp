@@ -181,9 +181,11 @@ bool sentenceHandler::getNextSentence(sentPair& sent, vcbList* elist, vcbList* f
 		resizeflag_vec.push_back(1);
       }
       //新加的
+      else
+      {
       if(dump_flag)
       		resizeflag_vec.push_back(0);
-	    
+      }    
       Buffer.push_back(s) ; //这是核心部分
 	    
       if (elist && flist){
