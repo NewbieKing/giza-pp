@@ -34,11 +34,12 @@ USA.
 #include <iostream>
 #include <sstream>
 #include <string>
+#include <vector>
 #include "Parameter.h"
 #include "errno.h"
 
 int PrintedTooLong=0;
-extern bool resizeflag;
+extern vector<bool> resizeflag_vec;
 
 /* -------------- Method Defnitions for Class sentenceHandler ---------------*/
 
@@ -173,8 +174,11 @@ bool sentenceHandler::getNextSentence(sentPair& sent, vcbList* elist, vcbList* f
 	cerr << s;
 	s.eSent.resize(min(s.eSent.size(),s.fSent.size()));
 	s.fSent.resize(min(s.eSent.size(),s.fSent.size()));
-	resizeflag=1;
+	//新加的
+	resizeflag_vec.push_back(1);
       }
+      //新加的
+      resizeflag_vec.push_back(0);
 	    
       Buffer.push_back(s) ; //这是核心部分
 	    
