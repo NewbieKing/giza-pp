@@ -221,7 +221,6 @@ void printAlignToFile(const Vector<WordIndex>& es,
       }
       if(resizeflag_vec[sHandler1.currentSentence-1])
 		of2<<"the pair has been resized!";
-      resizeflag=0;
       of2 << '\n';
       }//我们的if分支的结尾
 	  
