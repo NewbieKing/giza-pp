@@ -226,8 +226,8 @@ void printAlignToFile(const Vector<WordIndex>& es,
       /*
       if(dump_flag&&resizeflag_vec[cur-1])
 		of2<<"the pair has been resized!";
-      of2 << '\n';
       */
+      of2 << '\n';
       }//我们的if分支的结尾
 	  
       else
