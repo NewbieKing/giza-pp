@@ -466,6 +466,8 @@ void model3::viterbi_loop_with_tricks(Perplexity& perp, Perplexity& viterbiPerp,
   //cur=0;
   //dump_flag=dump_files;
   //结束
+	
+  //注意这里的getNextSentence运行时的情况是我们的currentSentence >= noSentInBuffer不成立，所以根本不进入这个if循环！所以我们之前所做的一些尝试和测试其实都是无用功！
   while(sHandler1.getNextSentence(sent)){
     //if( sent.eSent.size()==1||sent.fSent.size()==1 ) //注意我们在getNextSentence中对sent.eSent和sent.fSent都是先push进一个0,所以这里的意思是如果它们两个读到的是空行，则直接略过该循环下面的部分
     // continue; 但是为了解决我们oov时的空行问题，只能把这里注释掉了
