@@ -213,7 +213,7 @@ bool sentenceHandler::getNextSentence(sentPair& sent, vcbList* elist, vcbList* f
 	  }
       }
       noSentInBuffer++;
-    }
+    }//while结尾
     if (inputFile->eof()){
       allInMemory = (Buffer.size() >= 1 && 
 		     Buffer[currentSentence].sentenceNo == 1) ;
@@ -221,7 +221,7 @@ bool sentenceHandler::getNextSentence(sentPair& sent, vcbList* elist, vcbList* f
 	cout << "Corpus fits in memory, corpus has: " << Buffer.size() <<
 	  " sentence pairs.\n";
     }
-  }
+  }//if结尾
   if(noSentInBuffer <= 0 ){
     //cerr << "# sent in buffer " << noSentInBuffer << '\n';
     readflag = true ;
