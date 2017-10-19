@@ -36,8 +36,8 @@ USA.
 
 extern bool newflag;
 extern bool oovflag;
-//extern int cur;
-//extern bool dump_flag;
+extern int cur;
+extern bool dump_flag;
 GLOBAL_PARAMETER(float,PrintN,"nbestalignments","for printing the n best alignments",PARLEV_OUTPUT,0);
 
 const short LogHillClimb=0,LogPeg=0;
@@ -464,7 +464,7 @@ void model3::viterbi_loop_with_tricks(Perplexity& perp, Perplexity& viterbiPerp,
   int getSent_line_num=0;
   int read_line_num=0;
   //cur=0;
-  //dump_flag=dump_files;
+  dump_flag=dump_files;
   //结束
 	
   //注意这里的getNextSentence运行时的情况是我们的currentSentence >= noSentInBuffer不成立，所以根本不进入这个if循环！所以我们之前所做的一些尝试和测试其实都是无用功！
@@ -628,6 +628,8 @@ void model3::viterbi_loop_with_tricks(Perplexity& perp, Perplexity& viterbiPerp,
 	      getline(tar_check,tar_sent);
 	      read_line_num++;
       }
+      if(dump_flag)
+	      cur++;
 
       //这里FEWDUMPS,ONLYALDUMPS初值都为0（DUMPS初值也为0）
       if (dump_files||(FEWDUMPS&&sent.sentenceNo<1000)||(final&&(ONLYALDUMPS)) )//这里很明显只有在dump_files为true的情况下才会进行，而dump_files为true即是我们之前的final为true，循环进行到最后一轮
@@ -725,7 +727,7 @@ void model3::viterbi_loop_with_tricks(Perplexity& perp, Perplexity& viterbiPerp,
     vali.close();
     //结束
     //新加
-    //dump_flag=0;
+    dump_flag=0;
     //结束
     double FSent=pair_no;
     cout << "#centers(pre/hillclimbed/real): " << NAlignment/FSent << " " << NHillClimbed/FSent << " " << NCenter/FSent << "  #al: " << NTotal/FSent << " #alsophisticatedcountcollection: " <<   NumberOfAlignmentsInSophisticatedCountCollection/FSent << " #hcsteps: " << HillClimbingSteps/FSent << '\n';
