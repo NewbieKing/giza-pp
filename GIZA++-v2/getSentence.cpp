@@ -39,9 +39,9 @@ USA.
 #include "errno.h"
 
 int PrintedTooLong=0;
-//extern vector<bool> resizeflag_vec;
-//extern int cur;
-//extern bool dump_flag;
+extern vector<bool> resizeflag_vec;
+extern int cur;
+extern bool vec_flag;
 
 /* -------------- Method Defnitions for Class sentenceHandler ---------------*/
 
@@ -97,6 +97,7 @@ sentenceHandler::sentenceHandler(const char*  filename, vcbList* elist,
     }
   else
     realCount=0;
+  vec_flag=0;
 }
 
 //下面是我们新定义的函数
@@ -178,19 +179,19 @@ bool sentenceHandler::getNextSentence(sentPair& sent, vcbList* elist, vcbList* f
 	s.eSent.resize(min(s.eSent.size(),s.fSent.size()));
 	s.fSent.resize(min(s.eSent.size(),s.fSent.size()));
 	//新加的
-	/*
-	if(dump_flag)
+	
+	if(vec_flag)
 		resizeflag_vec.push_back(1);
-        */
+        
       }
       //新加的
-      /*
+    
       else
       {
-      if(dump_flag)
+      if(vec_flag)
       		resizeflag_vec.push_back(0);
       } 
-      */
+     
       Buffer.push_back(s) ; //这是核心部分
 	    
       if (elist && flist){
