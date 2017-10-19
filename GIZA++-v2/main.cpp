@@ -139,9 +139,10 @@ bool FEWDUMPS=0;
 //下面是我们新增的全局变量
 bool newflag=0;
 bool oovflag=0;
-//vector<bool> resizeflag_vec;
-//int cur=0;
-//bool dump_flag=0;
+vector<bool> resizeflag_vec;
+int cur=0;
+bool dump_flag=0;
+bool vec_flag=0;
 //结束
 GLOBAL_PARAMETER(bool,ONLYALDUMPS,"ONLYALDUMPS","1: do not write any files",PARLEV_OUTPUT,0);
 GLOBAL_PARAMETER(short,CompactAlignmentFormat,"CompactAlignmentFormat","0: detailled alignment format, 1: compact alignment format ",PARLEV_OUTPUT,0);
@@ -568,7 +569,8 @@ double StartTesting(int &result)
   corpus = new sentenceHandler(CorpusFilename.c_str(), &eTrainVcbList, &fTrainVcbList);
   if (TestCorpusFilename == "NONE")
     TestCorpusFilename = "";
-
+  if(newflag&&oovflag)
+    vec_flag=1;
   if (TestCorpusFilename != "")
       testCorpus= new sentenceHandler(TestCorpusFilename.c_str(), &eTestVcbList, &fTestVcbList);
   useDict=0;
