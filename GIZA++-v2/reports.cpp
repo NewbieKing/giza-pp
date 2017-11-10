@@ -155,6 +155,8 @@ void printAlignToFile(const Vector<WordIndex>& es,
       vector<bool> incre_flag_list(tar_list.size(),0);
       vector<bool> tfind_flag_list(m+1,0);
       vector<bool> sfind_flag_list(l+1,0);
+      //下面的pos_list是用来对我们source和target sentence中的oov词补全对齐信息的，目前我们只实现了相同oov词一对一的情况，一对多和多对多都没有实现
+      vector<WordIndex> pos_list(sou_list.size(),0);
       //下面是输出内容
       of2 << "# Sentence pair (" << pair_no <<") source length " << l << " target length "<< m << 
 	" alignment score : "<< alignment_score << '\n';
@@ -164,6 +166,11 @@ void printAlignToFile(const Vector<WordIndex>& es,
 	     if(tar_list[k][tar_list[k].size()-1]=='0') //注意这里一定不要忘记我们索引出来的是一个字符！！！所以不能直接和数字0比较
 	   //注意这里我们的每个tar_list[k]是有汉语，而一个汉字所占用的不是一个char字符位置
  	     {
+		     for(WordIndex t=0;t<sou_list.size();t++)
+                     {          
+                                if(tar_list[k]==sou_list[t])
+                                        pos_list[t]=k+1;
+                     }
 		     of2<<tar_list[k].erase(tar_list[k].size()-1,1)<<"oov"<<" "; 
 	             incre_flag_list[k]=1;
 	     }
@@ -203,6 +210,10 @@ void printAlignToFile(const Vector<WordIndex>& es,
 	if(sou_list[k][sou_list[k].size()-1]=='0')
 	{
 		of2<<sou_list[k].erase(sou_list[k].size()-1,1)<<"oov"<<" ";
+		if(pos_list[k]!=0)
+		{
+			of2<<"({ "<<pos_list[k]<<" }) ";
+		}
 	}
 	else
 	{
