@@ -164,7 +164,7 @@ void printAlignToFile(const Vector<WordIndex>& es,
 	     if(tar_list[k][tar_list[k].size()-1]=='0') //注意这里一定不要忘记我们索引出来的是一个字符！！！所以不能直接和数字0比较
 	   //注意这里我们的每个tar_list[k]是有汉语，而一个汉字所占用的不是一个char字符位置
  	     {
-		     of2<<tar_list[k]<<"!@#"<<" "; 
+		     of2<<tar_list[k].erase(tar_list[k].size()-1,1)<<"oov"<<" "; 
 	             incre_flag_list[k]=1;
 	     }
  	     else
@@ -202,7 +202,7 @@ void printAlignToFile(const Vector<WordIndex>& es,
       for (WordIndex k = 0  ; k < sou_list.size() ; k++){
 	if(sou_list[k][sou_list[k].size()-1]=='0')
 	{
-		of2<<sou_list[k]<<"@!#"<<" ";
+		of2<<sou_list[k].erase(sou_list[k].size()-1,1)<<"oov"<<" ";
 	}
 	else
 	{
