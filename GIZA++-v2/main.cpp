@@ -136,7 +136,7 @@ bool Transfer=TRANSFER;
 bool Transfer2to3=0;
 short NoEmptyWord=0;
 bool FEWDUMPS=0;
-//下面是我们新增的全局变量
+//下面是我们新增的全局变量,其中newflag对应我们的命令行参数-NEW,oovflag对应我们的命令行参数-OOV。
 bool newflag=0;
 bool oovflag=0;
 vector<bool> resizeflag_vec;
